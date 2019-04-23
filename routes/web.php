@@ -20,5 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('classes', 'ClassesController');
+
+//Components of the classes.
 Route::resource('classes.labs', 'LabsController');
 Route::resource('classes.labs.assignments', 'AssignmentsController');
+
+//Users of the classes:
+Route::resource('classes.teachers', 'TeachersController');
+Route::resource('classes.teachers.assistants', 'AssistantsController');
+Route::resource('classes.students', 'StudentsController');
