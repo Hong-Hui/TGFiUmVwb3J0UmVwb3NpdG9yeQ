@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title', 'Labs')
+
 @section('content')
-    <h1>LRR Home Page</h1>
+
+Labs.index placeholder
+
 @endsection
