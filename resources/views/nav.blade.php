@@ -20,7 +20,10 @@
                     <a class="nav-link" href="{{ route('classes.index') }}">Classes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('teachers.index') }}">Teachers</a>
+                    <a class="nav-link" href="{{ route('classes.teachers.index', 'classe_id') }}">Teachers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('classes.students.index', 'classe_id') }}">Students</a>
                 </li>
             </ul>
 
