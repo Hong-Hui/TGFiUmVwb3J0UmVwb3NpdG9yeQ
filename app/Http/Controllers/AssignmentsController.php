@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use Illuminate\Http\Request;
 
 class AssignmentsController extends Controller
 {
-    public function index()
+    public function index($lab_id)
     {
-        //
-        return view('assignments.index');
+        $assignments = Assignment::all()->where('lab_id', $lab_id);
+
+        return view('assignments.index', compact('assignments', $assignments));
     }
 
     public function create()

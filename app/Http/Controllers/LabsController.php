@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Lab;
 use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
-    public function index()
+    public function index($classe_id)
     {
-        return view('labs.index');
+        $labs = Lab::all()->where('classe_id', $classe_id);
+
+        return view('labs.index', compact('labs', $labs));
     }
 
     public function create()

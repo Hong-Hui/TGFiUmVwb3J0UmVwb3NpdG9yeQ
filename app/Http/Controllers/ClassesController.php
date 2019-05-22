@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classe;
 use Illuminate\Http\Request;
 
 class ClassesController extends Controller
@@ -9,7 +10,9 @@ class ClassesController extends Controller
 
     public function index()
     {
-        return view('classes.index');
+        $classes = Classe::all();
+
+        return view('classes.index', compact('classes', $classes));
     }
 
     public function create()

@@ -4,6 +4,11 @@
 
 @section('content')
 
-Classes.index placeholder
+{{-- Classes.index placeholder --}}
+<ul>
+    @foreach ($classes as $classe)
+        <li>{{ $classe }}</li>
+    @endforeach
+</ul>
 
 @endsection
