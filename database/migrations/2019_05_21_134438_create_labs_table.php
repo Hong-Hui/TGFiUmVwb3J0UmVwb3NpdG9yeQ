@@ -14,8 +14,8 @@ class CreateLabsTable extends Migration
             $table->unsignedBigInteger('classe_id');
 
             $table->string('title');
-            // $table->string('max_members'); // max number of students per assignment
-            // $table->date('deadline');
+            $table->string('max_members'); // max number of students per assignment
+            $table->date('deadline');
 
             $table->timestamps();
         });

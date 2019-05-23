@@ -11,7 +11,7 @@ class LabsController extends Controller
     {
         $labs = Lab::all()->where('classe_id', $classe_id);
 
-        return view('labs.index', compact('labs', $labs));
+        return view('labs.index', compact('labs'));
     }
 
     public function create()

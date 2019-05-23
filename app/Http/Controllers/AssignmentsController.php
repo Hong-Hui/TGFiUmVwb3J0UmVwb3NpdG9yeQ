@@ -11,7 +11,7 @@ class AssignmentsController extends Controller
     {
         $assignments = Assignment::all()->where('lab_id', $lab_id);
 
-        return view('assignments.index', compact('assignments', $assignments));
+        return view('assignments.index', compact('assignments'));
     }
 
     public function create()
