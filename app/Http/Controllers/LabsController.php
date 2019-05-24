@@ -9,7 +9,7 @@ class LabsController extends Controller
 {
     public function index($classe_id)
     {
-        $labs = Lab::all()->where('classe_id', $classe_id);
+        $labs = Lab::where('classe_id', $classe_id)->get();
 
         return view('labs.index', compact('labs'));
     }

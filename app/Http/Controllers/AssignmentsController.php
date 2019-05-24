@@ -9,7 +9,7 @@ class AssignmentsController extends Controller
 {
     public function index($lab_id)
     {
-        $assignments = Assignment::all()->where('lab_id', $lab_id);
+        $assignments = Assignment::where('lab_id', $lab_id)->get();
 
         return view('assignments.index', compact('assignments'));
     }
