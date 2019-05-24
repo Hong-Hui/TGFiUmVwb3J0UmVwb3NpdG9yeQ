@@ -10,9 +10,11 @@ class ClassesController extends Controller
 
     public function index()
     {
-        $classes = Classe::all();
+        $ongoingClasses = Classe::ongoing()->get();
+        $endedClasses = Classe::ended()->get();
+        $archivedClasses = Classe::archived()->get();
 
-        return view('classes.index', compact('classes'));
+        return view('classes.index', compact('ongoingClasses', 'endedClasses', 'archivedClasses'));
     }
 
     public function create()
@@ -27,8 +29,9 @@ class ClassesController extends Controller
         $classe = new Classe();
 
         $data = request()->validate([
-            'major' => 'required',
-            'year' => 'required',
+            'name' => 'required|min:5',
+            'major' => 'required|min:5',
+            'year' => 'required|min:4|max:4',
             'semester' => 'required',
             'number' => 'required',
             'status' => 'required',
