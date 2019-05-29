@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Add New Classe')
+@section('title', 'Create Classe')
 
 @section('content')
 
-{{-- Classes.create placeholder --}}
+{{-- classes.create placeholder --}}
 
-    <h1>Add New Classe</h1>
+    <h1>Create Classe</h1>
 
     <form action="/classes" method="POST">
         <div class="form-group">
@@ -50,7 +50,7 @@
             <div>{{ $errors->first('status') }}</div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Classe</button>
+        <button type="submit" class="btn btn-primary">Create</button>
 
         @csrf
     </form>

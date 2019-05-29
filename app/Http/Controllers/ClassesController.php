@@ -26,7 +26,7 @@ class ClassesController extends Controller
 
     public function store(Request $request)
     {
-        $classe = new Classe();
+        // $classe = new Classe();
 
         $data = request()->validate([
             'name' => 'required|min:5',
