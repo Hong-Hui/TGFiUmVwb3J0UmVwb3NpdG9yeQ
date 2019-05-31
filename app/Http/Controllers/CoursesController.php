@@ -2,44 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Classe;
+use App\Course;
 use Illuminate\Http\Request;
 
-class ClassesController extends Controller
+class CoursesController extends Controller
 {
 
     public function index()
     {
-        $ongoingClasses = Classe::ongoing()->get();
-        $endedClasses = Classe::ended()->get();
-        $archivedClasses = Classe::archived()->get();
+        $ongoingCourses = Course::ongoing()->get();
+        $endedCourses = Course::ended()->get();
+        $archivedCourses = Course::archived()->get();
 
-        return view('classes.index', compact('ongoingClasses', 'endedClasses', 'archivedClasses'));
+        return view('courses.index', compact('ongoingCourses', 'endedCourses', 'archivedCourses'));
     }
 
     public function create()
     {
-        $classes = Classe::all();
+        $courses = Course::all();
 
-        return view('classes.create', compact('classes'));
+        return view('courses.create', compact('courses'));
     }
 
     public function store(Request $request)
     {
-        // $classe = new Classe();
+        // $course = new Course();
 
         $data = request()->validate([
             'name' => 'required|min:5',
             'major' => 'required|min:5',
             'year' => 'required|min:4|max:4',
-            'semester' => 'required',
-            'number' => 'required',
+            'section' => 'required',
+            'group' => 'required',
             'status' => 'required',
         ]);
 
-        Classe::create($data);
+        Course::create($data);
 
-        return redirect('classes');
+        return redirect('courses');
     }
 
     public function show($id)

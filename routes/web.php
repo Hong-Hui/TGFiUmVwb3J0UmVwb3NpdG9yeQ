@@ -19,17 +19,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Classes
-Route::resource('classes', 'ClassesController');
+//Courses
+Route::resource('courses', 'CoursesController');
 
 //Class Components
-Route::resource('classes.labs', 'LabsController');
-Route::resource('classes.labs.assignments', 'AssignmentsController');
+Route::resource('courses.labs', 'LabsController');
+Route::resource('courses.labs.assignments', 'AssignmentsController');
 
 //Users
-Route::resource('classes.teachers', 'TeachersController');
-Route::resource('classes.teachers.assistants', 'AssistantsController');
-Route::resource('classes.students', 'StudentsController');
+Route::resource('courses.teachers', 'TeachersController');
+Route::resource('courses.teachers.assistants', 'AssistantsController');
+Route::resource('courses.students', 'StudentsController');
 
 //Contact
 Route::get('contact', 'ContactFormController@create')->name('contact.create');

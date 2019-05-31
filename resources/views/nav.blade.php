@@ -17,13 +17,13 @@
                     <a class="nav-link" href="{{ route('contact.create') }}">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('classes.index') }}">Classes</a>
+                    <a class="nav-link" href="{{ route('courses.index') }}">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('classes.teachers.index', 'classe_id') }}">Teachers</a>
+                    <a class="nav-link" href="{{ route('courses.teachers.index', 'course_id') }}">Teachers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('classes.students.index', 'classe_id') }}">Students</a>
+                    <a class="nav-link" href="{{ route('courses.students.index', 'course_id') }}">Students</a>
                 </li>
             </ul>
 

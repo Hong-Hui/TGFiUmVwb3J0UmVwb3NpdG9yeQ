@@ -3,29 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Lab;
-use App\Classe;
+use App\Course;
 use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
-    public function index($classe_id)
+    public function index($course_id)
     {
-        // $labs = Lab::all();
+        $localCourse = Course::findOrFail($course_id);
+        $localLabs = Lab::localLabs($course_id)->get();
 
-        $localClasse = Classe::where('id', $classe_id)->get();
-        $localLabs = Lab::localLabs($classe_id)->get();
-
-        return view('classes.labs.index', compact('localLabs', 'localClasse'));
+        return view('courses.labs.index', compact('localCourse', 'localLabs'));
     }
 
-    public function create($classe_id)
+    public function create($course_id)
     {
         $labs = Lab::all();
 
-        return view('classes.labs.create', compact('labs', 'classe_id'));
+        return view('courses.labs.create', compact('labs', 'course_id'));
     }
 
-    public function store(Request $request, $classe_id)
+    public function store(Request $request, $course_id)
     {
         $data = request()->validate([
             'title' => 'required|min:5',
@@ -33,12 +31,11 @@ class LabsController extends Controller
             'deadline' => 'required',
         ]);
 
-        $data['classe_id'] = $classe_id;
+        $data['course_id'] = $course_id;
 
         Lab::create($data);
 
-        // no way man xD
-        return redirect('classes/' . $classe_id . '/labs');
+        return redirect('courses/' . $course_id . '/labs');
     }
 
     public function show($id)

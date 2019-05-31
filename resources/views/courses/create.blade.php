@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Create Classe')
+@section('title', 'Create Course')
 
 @section('content')
 
-{{-- classes.create placeholder --}}
+{{-- courses.create placeholder --}}
 
-    <h1>Create Classe</h1>
+    <h1>Create Course</h1>
 
-    <form action="/classes" method="POST">
+    <form action="/courses" method="POST">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" value="{{ old('name') }}" class="form-control">
@@ -28,15 +28,15 @@
         </div>
 
         <div class="form-group">
-            <label for="semester">Semester</label>
-            <input type="text" name="semester" value="{{ old('semester') }}" class="form-control">
-            <div>{{ $errors->first('semester') }}</div>
+            <label for="section">Section</label>
+            <input type="text" name="section" value="{{ old('section') }}" class="form-control">
+            <div>{{ $errors->first('section') }}</div>
         </div>
 
         <div class="form-group">
-            <label for="number">Number</label>
-            <input type="text" name="number" value="{{ old('number') }}" class="form-control">
-            <div>{{ $errors->first('number') }}</div>
+            <label for="group">Group</label>
+            <input type="text" name="group" value="{{ old('group') }}" class="form-control">
+            <div>{{ $errors->first('group') }}</div>
         </div>
 
         <div class="form-group">

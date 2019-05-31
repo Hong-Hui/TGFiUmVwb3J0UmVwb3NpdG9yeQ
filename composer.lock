@@ -3233,7 +3233,7 @@
                     "email": "opensource@ijaap.nl"
                 }
             ],
-            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "description": "Common reflection courses used by phpdocumentor to reflect the code structure",
             "homepage": "http://www.phpdoc.org",
             "keywords": [
                 "FQSEN",
@@ -4303,7 +4303,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+            "description": "Library that helps with managing the version group of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03T07:35:21+00:00"
         },

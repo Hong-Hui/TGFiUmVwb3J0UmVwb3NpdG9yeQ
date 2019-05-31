@@ -11,11 +11,13 @@ class CreateLabsTable extends Migration
         Schema::create('labs', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('classe_id');
+            $table->unsignedBigInteger('course_id');
 
             $table->string('title');
             $table->string('max_members'); // max number of students per assignment
             $table->date('deadline');
+
+            $table->foreign('course_id')->references('id')->on('courses');
 
             $table->timestamps();
         });

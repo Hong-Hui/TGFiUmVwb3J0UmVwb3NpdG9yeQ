@@ -9,8 +9,8 @@ class Lab extends Model
     protected $guarded = [];
 
     // Relationships
-    public function classe() {
-        return $this->belongsTo(\App\Classe::class);
+    public function course() {
+        return $this->belongsTo(\App\Course::class);
     }
 
     public function assignments() {
@@ -18,8 +18,8 @@ class Lab extends Model
     }
 
     // Scopes
-    public function scopeLocalLabs($query, $classe_id)
+    public function scopeLocalLabs($query, $course_id)
     {
-        return $query->where('classe_id', $classe_id);
+        return $query->where('course_id', $course_id);
     }
 }

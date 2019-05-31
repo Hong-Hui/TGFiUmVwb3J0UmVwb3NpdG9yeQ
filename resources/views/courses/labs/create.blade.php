@@ -4,23 +4,23 @@
 
 @section('content')
 
-{{-- classes.labs.create placeholder --}}
+{{-- courses.labs.create placeholder --}}
 
-    <h1>Create New Lab to {{ $classe_id }}</h1>
+    <h1>Create New Lab to {{ $course_id }}</h1>
 
     {{-- still has to find the correct action --}}
-    <form action="/classes/{{ $classe_id }}/labs" method="POST">
+    <form action="/courses/{{ $course_id }}/labs" method="POST">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" value="{{ old('title') }}" class="form-control">
             <div>{{ $errors->first('title') }}</div>
         </div>
 
-        {{-- classe id has to be the id of the classe in which the lab is created, not a free input --}}
+        {{-- course id has to be the id of the course in which the lab is created, not a free input --}}
         {{-- <div class="form-group">
-            <label for="classe_id">Class Id</label>
-            <input type="text" name="classe_id" value="{{ old('classe_id') }}" class="form-control">
-            <div>{{ $errors->first('classe_id') }}</div>
+            <label for="course_id">Class Id</label>
+            <input type="text" name="course_id" value="{{ old('course_id') }}" class="form-control">
+            <div>{{ $errors->first('course_id') }}</div>
         </div> --}}
 
         {{-- deadline has to be better formatted --}}

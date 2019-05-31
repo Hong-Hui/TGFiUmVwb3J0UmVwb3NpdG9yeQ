@@ -4,19 +4,16 @@
 
 @section('content')
 
-{{-- classes.labs.index placeholder --}}
-
+{{-- courses.labs.index placeholder --}}
 
 <div class="row">
     <div class="col-12">
-        {{-- <h1>Labs List for {{ $labs->classe }}</h1> --}}
+        <h1>Labs of : {{ $localCourse->name }}
+            <span class="text-muted">{{ $localCourse->year }}</span>
+        </h1>
         <p><a href="labs/create">Create New Lab</a></p>
     </div>
 </div>
-
-<h1>Labs of : {{ $localClasse->findOrFail()->name }}
-    <span class="text-muted">{{ $localClasse->firstOrFail()->year }}</span>
-</h1>
 
 <div class="row">
     <div class="col-2">
@@ -26,7 +23,7 @@
         Title
     </div>
     <div class="col-4">
-        Classe
+        Course {{-- submissions --}}
     </div>
     <div class="col-2">
         Deadline
@@ -38,13 +35,13 @@
 @foreach ($localLabs as $localLab)
     <div class="row">
         <div class="col-2">
-            <a href="/classes/{{ $localLab->id }}">{{ $localLab->id }}</a>
+            <a href="/courses/{{ $localLab->id }}">{{ $localLab->id }}</a>
         </div>
         <div class="col-4">
             {{ $localLab->title }}
         </div>
         <div class="col-4">
-            {{ $localLab->classe->name }}
+            {{ $localLab->course->name }}
         </div>
         <div class="col-2">
             {{ $localLab->deadline }}
