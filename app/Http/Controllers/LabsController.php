@@ -18,9 +18,10 @@ class LabsController extends Controller
 
     public function create($course_id)
     {
-        $labs = Lab::all();
+        $localCourse = Course::findOrFail($course_id);
+        $localLabs = Lab::localLabs($course_id)->get();
 
-        return view('courses.labs.create', compact('labs', 'course_id'));
+        return view('courses.labs.create', compact('localCourse', 'localLabs'));
     }
 
     public function store(Request $request, $course_id)
@@ -31,6 +32,7 @@ class LabsController extends Controller
             'deadline' => 'required',
         ]);
 
+        $data['status'] = 'partially marked';
         $data['course_id'] = $course_id;
 
         Lab::create($data);

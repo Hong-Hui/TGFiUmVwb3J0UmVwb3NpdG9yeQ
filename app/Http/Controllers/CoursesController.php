@@ -11,10 +11,10 @@ class CoursesController extends Controller
     public function index()
     {
         $ongoingCourses = Course::ongoing()->get();
-        $endedCourses = Course::ended()->get();
+        $completedCourses = Course::completed()->get();
         $archivedCourses = Course::archived()->get();
 
-        return view('courses.index', compact('ongoingCourses', 'endedCourses', 'archivedCourses'));
+        return view('courses.index', compact('ongoingCourses', 'completedCourses', 'archivedCourses'));
     }
 
     public function create()
@@ -26,8 +26,6 @@ class CoursesController extends Controller
 
     public function store(Request $request)
     {
-        // $course = new Course();
-
         $data = request()->validate([
             'name' => 'required|min:5',
             'major' => 'required|min:5',

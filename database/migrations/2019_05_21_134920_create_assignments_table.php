@@ -15,6 +15,9 @@ class CreateAssignmentsTable extends Migration
 
             $table->string('title');
             $table->string('source'); // the source file
+            $table->smallInteger('mark');
+
+            $table->foreign('lab_id')->references('id')->on('labs');
 
             $table->timestamps();
         });

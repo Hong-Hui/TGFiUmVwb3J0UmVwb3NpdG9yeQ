@@ -20,9 +20,9 @@ class Course extends Model
         return $query->where('status', 'ongoing');
     }
 
-    public function scopeEnded($query)
+    public function scopeCompleted($query)
     {
-        return $query->where('status', 'ended');
+        return $query->where('status', 'completed');
     }
 
     public function scopeArchived($query)

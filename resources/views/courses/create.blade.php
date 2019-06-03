@@ -44,7 +44,7 @@
             <select name="status" id="status" class="form-control">
                 <option value="" disabled>Class Status</option>
                 <option value="ongoing">Ongoing</option>
-                <option value="ended">Ended</option>
+                <option value="completed">Completed</option>
                 <option value="archived">Archived</option>
             </select>
             <div>{{ $errors->first('status') }}</div>

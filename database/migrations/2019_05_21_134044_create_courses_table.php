@@ -14,7 +14,7 @@ class CreateCoursesTable extends Migration
             $table->string('name'); // i.e Project Management
             $table->string('major'); // i.e Software Engineering
             $table->string('year');
-            $table->string('semester'); // fall || winter
+            $table->string('section'); // fall || winter
             $table->string('group'); // in case there exist many
             $table->string('status'); // ongoing || finished
 

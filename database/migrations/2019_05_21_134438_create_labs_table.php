@@ -16,6 +16,7 @@ class CreateLabsTable extends Migration
             $table->string('title');
             $table->string('max_members'); // max number of students per assignment
             $table->date('deadline');
+            $table->string('status');
 
             $table->foreign('course_id')->references('id')->on('courses');
 

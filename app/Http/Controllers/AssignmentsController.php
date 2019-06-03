@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Assignment;
+use App\Lab;
 use Illuminate\Http\Request;
 
 class AssignmentsController extends Controller
 {
     public function index($lab_id)
     {
-        $assignments = Assignment::where('lab_id', $lab_id)->get();
+        $localLab = Lab::findOrFail($lab_id);
+        $localAssignments = Assignment::localAssignments($lab_id)->get();
 
-        return view('assignments.index', compact('assignments'));
+        return view('courses.labs.assignments.index', compact('localLab', 'localAssignments'));
     }
 
     public function create()
