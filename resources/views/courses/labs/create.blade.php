@@ -6,10 +6,10 @@
 
 {{-- courses.labs.create placeholder --}}
 
-    <h1>Create New Lab for <span class="text-muted">{{ $localCourse->name }}</h1>
+    <h1>Create New Lab for <span class="text-muted">{{ $course->name }}</h1>
 
     {{-- still has to find the correct action --}}
-    <form action="/courses/{{ $localCourse->id }}/labs" method="POST">
+    <form action="/courses/{{ $course->id }}/labs" method="POST">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" value="{{ old('title') }}" class="form-control">

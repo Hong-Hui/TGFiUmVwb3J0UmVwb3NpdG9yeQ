@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Courses
 Route::resource('courses', 'CoursesController');
 
-//Class Components
+//Course Components
 Route::resource('courses.labs', 'LabsController');
 Route::resource('courses.labs.assignments', 'AssignmentsController');
 

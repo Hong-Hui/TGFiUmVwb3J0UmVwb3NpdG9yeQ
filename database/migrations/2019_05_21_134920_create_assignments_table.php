@@ -14,8 +14,10 @@ class CreateAssignmentsTable extends Migration
             $table->unsignedBigInteger('lab_id');
 
             $table->string('title');
-            $table->string('source'); // the source file
-            $table->smallInteger('mark');
+            $table->string('source');
+            $table->smallInteger('mark')->nullable();
+            $table->string('status');
+            $table->string('visibility');
 
             $table->foreign('lab_id')->references('id')->on('labs');
 

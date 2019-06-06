@@ -4,39 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Assignment;
 use App\Lab;
+use App\Course;
+
 use Illuminate\Http\Request;
 
 class AssignmentsController extends Controller
 {
-    public function index($lab_id)
-    {
-        $localLab = Lab::findOrFail($lab_id);
-        $localAssignments = Assignment::localAssignments($lab_id)->get();
 
-        return view('courses.labs.assignments.index', compact('localLab', 'localAssignments'));
+    // Start Restful
+
+    public function index(Course $course, Lab $lab)
+    {
+        return view('courses.labs.assignments.index', compact('course', 'lab'));
     }
 
-    public function create($lab_id)
+    public function create(Course $course, Lab $lab)
     {
-        $localLab = Lab::findOrFail($lab_id);
-        $localAssignments = Assignment::localAssignments($lab_id)->get();
-
-        return view('courses.labs.assignments.create', compact('localLab', 'localAssignments'));
+        return view('courses.labs.assignments.create', compact('course', 'lab'));
     }
 
-    public function store(Request $request, $lab_id)
+    public function store(Request $request, Course $course, Lab $lab)
     {
-        $data = request()->validate([
-            'title' => 'required|min:10',
-            'source' => 'required',
-            'mark' => 'required',
+        $assignment = Assignment::create($this->validateRequest($lab));
+
+        $originalFileName = $request->source->getClientOriginalName();
+
+        $assignment->update([
+            'source' => request()->source->storeAs('public/uploads', $originalFileName)
         ]);
 
-        $data['status'] = 'pending';
-
-        Lab::create($data);
-
-        return redirect('labs/' . $lab_id . '/assignments');
+        return redirect('/courses/' . $lab->course->id . '/labs/' . $lab->id . '/assignments');
     }
 
     public function show($id)
@@ -58,4 +55,41 @@ class AssignmentsController extends Controller
     {
         //
     }
+
+    // End Restful
+
+    private function validateRequest($lab)
+    {
+        $validatedData = request()->validate([
+            'title' => 'required|min:10',
+            'mark' => 'sometimes',
+            'visibility' => 'required',
+            'source' => 'file|max:2000|
+                mimes:
+                doc,odt,pdf,rtf,tex,wks,wps,wpd,txt,
+                c,cpp,class,cs,h,java,sh,swift,vb,
+                ods,xlr,xls,xlsx,
+                pps,ppt,pptx,
+                asp,aspx,css,js,htm,html,jsp,php,xhtml,
+                jpeg,jpg,png,bmp,
+                dat,db,log,sql,xml,
+                7z,zip,rar',
+        ]);
+
+        $validatedData['status'] = 'pending';
+        $validatedData['lab_id'] = $lab->id;
+
+        return $validatedData;
+    }
+
+    // saved for update() inmplimentation
+        // private function storeSource($assignment)
+        // {
+        //     if (request()->has('source')) {
+        //         $assignment->update([
+        //             'source' => request()->source->store('uploads', 'public')
+        //         ]);
+        //     }
+        // }
+    //
 }

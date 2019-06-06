@@ -8,8 +8,8 @@
 
 <div class="row">
     <div class="col-12">
-        <h1>Labs of : {{ $localCourse->name }}
-            <span class="text-muted">{{ $localCourse->year }}</span>
+        <h1>Labs of : {{ $course->name }}
+            <span class="text-muted">{{ $course->year }}</span>
         </h1>
         <p><a href="labs/create">New Lab</a></p>
         <p><a href="/courses">Back to Courses</a></p>
@@ -17,35 +17,35 @@
 </div>
 
 <div class="row">
-    <div class="col-3">
+    <div class="col-4">
         <b>Title</b>
     </div>
-    <div class="col-3">
+    <div class="col-2">
         Submissions
     </div>
-    <div class="col-3">
+    <div class="col-4">
         Deadline
     </div>
-    <div class="col-3">
+    <div class="col-2">
         Status
     </div>
 </div>
 
 <hr>
 
-@foreach ($localLabs as $localLab)
+@foreach ($course->labs as $lab)
     <div class="row">
         <div class="col-4">
-            <a href="labs/{{ $localLab->id }}/assignments">{{ $localLab->title }}</a>
+            <a href="labs/{{ $lab->id }}/assignments">{{ $lab->title }}</a>
         </div>
         <div class="col-2">
-            {{ $localLab->assignments->count() }}
+            {{ $lab->assignments->count() }}
         </div>
         <div class="col-4">
-            {{ $localLab->deadline }}
+            {{ $lab->deadline }}
         </div>
         <div class="col-2">
-            {{ $localLab->status }}
+            {{ $lab->status }}
         </div>
     </div>
 @endforeach

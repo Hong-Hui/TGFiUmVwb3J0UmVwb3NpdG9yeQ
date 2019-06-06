@@ -26,16 +26,7 @@ class CoursesController extends Controller
 
     public function store(Request $request)
     {
-        $data = request()->validate([
-            'name' => 'required|min:5',
-            'major' => 'required|min:5',
-            'year' => 'required|min:4|max:4',
-            'section' => 'required',
-            'group' => 'required',
-            'status' => 'required',
-        ]);
-
-        Course::create($data);
+        $course = Course::create($this->validateRequest());
 
         return redirect('courses');
     }
@@ -58,5 +49,21 @@ class CoursesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // End Restful
+
+    private function validateRequest()
+    {
+        $validatedData = request()->validate([
+            'name' => 'required|min:5',
+            'major' => 'required|min:5',
+            'year' => 'required|min:4|max:4',
+            'section' => 'required',
+            'group' => 'required',
+            'status' => 'required',
+        ]);
+
+        return $validatedData;
     }
 }

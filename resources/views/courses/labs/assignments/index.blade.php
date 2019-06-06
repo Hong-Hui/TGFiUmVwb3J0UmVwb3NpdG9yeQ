@@ -8,8 +8,8 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>Assignments of : {{ $localLab->title }}
-                <span class="text-muted badge badge-warning">Submit before {{ $localLab->deadline }}</span>
+            <h1>Assignments of : {{ $lab->title }}
+                <span class="text-muted badge badge-warning">Submit before {{ $lab->deadline }}</span>
             </h1>
             <p><a href="assignments/create">New Assignment</a></p>
         </div>
@@ -20,28 +20,32 @@
         <div class="col-3">Owner</div>
         <div class="col-3">Submission Date</div>
         <div class="col-1">Status</div>
-        <div class="col-2">Mark</div>
+        <div class="col-1">Visibility</div>
+        <div class="col-1">Mark</div>
     </div>
 
     <hr>
 
-    @foreach ($localAssignments as $localAssignment)
+    @foreach ($lab->assignments as $assignment)
         <div class="row">
             <div class="col-3">
-                <a href="assignments/{{ $localAssignment->id }}">{{ $localAssignment->title }}</a>
+                <a href="assignments/{{ $assignment->id }}">{{ $assignment->title }}</a>
             </div>
             <div class="col-3">
                 {{-- to be implimented later --}}
                 owner placeholder
             </div>
             <div class="col-3">
-                {{ $localAssignment->updated_at }}
+                {{ $assignment->updated_at }}
             </div>
             <div class="col-1">
-                {{ $localAssignment->status }} {{-- {{ $localAssignment->status }} --}}
+                {{ $assignment->status }}
             </div>
-            <div classe="col-2">
-                {{ $localAssignment->mark }}
+            <div class="col-1">
+                {{ $assignment->visibility }}
+            </div>
+            <div classe="col-1">
+                {{ $assignment->mark }}
             </div>
         </div>
     @endforeach

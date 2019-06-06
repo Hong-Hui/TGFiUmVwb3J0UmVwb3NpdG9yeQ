@@ -8,36 +8,21 @@ use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
-    public function index($course_id)
+    public function index(Course $course)
     {
-        $localCourse = Course::findOrFail($course_id);
-        $localLabs = Lab::localLabs($course_id)->get();
-
-        return view('courses.labs.index', compact('localCourse', 'localLabs'));
+        return view('courses.labs.index', compact('course'));
     }
 
-    public function create($course_id)
+    public function create(Course $course)
     {
-        $localCourse = Course::findOrFail($course_id);
-        $localLabs = Lab::localLabs($course_id)->get();
-
-        return view('courses.labs.create', compact('localCourse', 'localLabs'));
+        return view('courses.labs.create', compact('course'));
     }
 
-    public function store(Request $request, $course_id)
+    public function store(Request $request, Course $course)
     {
-        $data = request()->validate([
-            'title' => 'required|min:5',
-            'max_members' => 'required',
-            'deadline' => 'required',
-        ]);
+        $lab = Lab::create($this->validateRequest($course));
 
-        $data['status'] = 'partially marked';
-        $data['course_id'] = $course_id;
-
-        Lab::create($data);
-
-        return redirect('courses/' . $course_id . '/labs');
+        return redirect('courses/' . $course->id . '/labs');
     }
 
     public function show($id)
@@ -58,5 +43,21 @@ class LabsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // End Restful
+
+    private function validateRequest($course)
+    {
+        $validatedData = request()->validate([
+            'title' => 'required|min:5',
+            'max_members' => 'required',
+            'deadline' => 'required',
+        ]);
+
+        $validatedData['status'] = 'partially marked';
+        $validatedData['course_id'] = $course->id;
+
+        return $validatedData;
     }
 }
