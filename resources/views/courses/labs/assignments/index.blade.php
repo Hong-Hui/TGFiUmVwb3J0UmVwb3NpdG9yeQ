@@ -12,6 +12,7 @@
                 <span class="text-muted badge badge-warning">Submit before {{ $lab->deadline }}</span>
             </h1>
             <p><a href="assignments/create">New Assignment</a></p>
+            <p><a href="/courses/{{ $lab->course_id }}/labs">Back to labs</a></p>
         </div>
     </div>
 
@@ -30,6 +31,7 @@
         <div class="row">
             <div class="col-3">
                 <a href="assignments/{{ $assignment->id }}">{{ $assignment->title }}</a>
+                <a href="assignments/{{ $assignment->id }}"><span class="text-muted">Details</span></a>
             </div>
             <div class="col-3">
                 {{-- to be implimented later --}}

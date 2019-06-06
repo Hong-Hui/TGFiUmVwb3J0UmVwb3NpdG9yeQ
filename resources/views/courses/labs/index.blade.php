@@ -37,6 +37,7 @@
     <div class="row">
         <div class="col-4">
             <a href="labs/{{ $lab->id }}/assignments">{{ $lab->title }}</a>
+            <a href="labs/{{ $lab->id }}"><span class="text-muted">Details</span></a>
         </div>
         <div class="col-2">
             {{ $lab->assignments->count() }}

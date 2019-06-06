@@ -6,6 +6,8 @@
 
 {{-- Courses.index placeholder --}}
 
+{{-- a refactor is needed where the courses are sorted by major or year --}}
+
 <p><a href="courses/create">New Course</a></p>
 
 <div class="row">
@@ -16,6 +18,7 @@
                 <li><a href="courses/{{ $ongoingCourse->id }}/labs">{{ $ongoingCourse->name }}</a>
                     <span class="text-muted">- {{ $ongoingCourse->major }}</span>
                     <span class="text-muted">({{ $ongoingCourse->year }})</span>
+                    <a href="courses/{{ $ongoingCourse->id }}">Details</a>
                 </li>
             @endforeach
         </ul>
@@ -28,6 +31,7 @@
                 <li><a href="courses/{{ $completedCourse->id }}">{{ $completedCourse->name }}</a>
                     <span class="text-muted">- {{ $completedCourse->major }}</span>
                     <span class="text-muted">({{ $completedCourse->year}})</span>
+                    <a href="courses/{{ $completedCourse->id }}">Details</a>
                 </li>
             @endforeach
         </ul>
@@ -40,6 +44,7 @@
                 <li><a href="courses/{{ $archivedCourse->id }}">{{ $archivedCourse->name }}</a>
                     <span class="text-muted">- {{ $archivedCourse->major }}</span>
                     <span class="text-muted">({{ $archivedCourse->year }})</span>
+                    <a href="courses/{{ $archivedCourse->id }}">Details</a>
                 </li>
             @endforeach
         </ul>

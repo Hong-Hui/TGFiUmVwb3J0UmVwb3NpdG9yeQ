@@ -36,9 +36,9 @@ class AssignmentsController extends Controller
         return redirect('/courses/' . $lab->course->id . '/labs/' . $lab->id . '/assignments');
     }
 
-    public function show($id)
+    public function show(Course $course, Lab $lab, Assignment $assignment)
     {
-        //
+        return view('courses.labs.assignments.show', compact('assignment'));
     }
 
     public function edit($id)

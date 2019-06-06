@@ -31,9 +31,9 @@ class CoursesController extends Controller
         return redirect('courses');
     }
 
-    public function show($id)
+    public function show(Course $course)
     {
-        //
+        return view('courses.show', compact('course'));
     }
 
     public function edit($id)

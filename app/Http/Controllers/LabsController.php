@@ -25,9 +25,9 @@ class LabsController extends Controller
         return redirect('courses/' . $course->id . '/labs');
     }
 
-    public function show($id)
+    public function show(Course $course, Lab $lab)
     {
-        //
+        return view('courses.labs.show', compact('lab'));
     }
 
     public function edit($id)
