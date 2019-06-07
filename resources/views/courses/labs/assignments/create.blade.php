@@ -5,23 +5,10 @@
 @section('content')
 
 {{-- Assignments.create placeholder --}}
-{{--
-$table->bigIncrements('id');
-
-$table->unsignedBigInteger('lab_id');
-
-$table->string('title');
-$table->string('source'); // the source file
-$table->smallInteger('mark');
-
-$table->foreign('lab_id')->references('id')->on('labs');
-
-$table->timestamps(); --}}
-
 
 <h1>Create New Lab for <span class="text-muted">{{ $lab->title }}</h1>
 
-    <form action="/courses/{{ $course->id }}/labs/{{ $lab->id }}/assignments" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('courses.labs.assignments.store', ['course' => $course, 'lab' => $lab]) }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" value="{{ old('title') }}" class="form-control">

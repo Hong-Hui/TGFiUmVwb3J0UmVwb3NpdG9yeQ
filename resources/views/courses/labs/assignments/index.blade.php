@@ -11,8 +11,8 @@
             <h1>Assignments of : {{ $lab->title }}
                 <span class="text-muted badge badge-warning">Submit before {{ $lab->deadline }}</span>
             </h1>
-            <p><a href="assignments/create">New Assignment</a></p>
-            <p><a href="/courses/{{ $lab->course_id }}/labs">Back to labs</a></p>
+            <p><a href="{{ route('courses.labs.assignments.create', ['course' => $course, 'lab' => $lab]) }}">New Assignment</a></p>
+            <p><a href="{{ route('courses.labs.index', ['course' => $course]) }}">Back to labs</a></p>
         </div>
     </div>
 
@@ -30,8 +30,8 @@
     @foreach ($lab->assignments as $assignment)
         <div class="row">
             <div class="col-3">
-                <a href="assignments/{{ $assignment->id }}">{{ $assignment->title }}</a>
-                <a href="assignments/{{ $assignment->id }}"><span class="text-muted">Details</span></a>
+                <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">{{ $assignment->title }}</a>
+                <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}"><span class="text-muted">Details</span></a>
             </div>
             <div class="col-3">
                 {{-- to be implimented later --}}

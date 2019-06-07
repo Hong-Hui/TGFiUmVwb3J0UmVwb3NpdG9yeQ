@@ -8,17 +8,17 @@
 
 {{-- a refactor is needed where the courses are sorted by major or year --}}
 
-<p><a href="courses/create">New Course</a></p>
+<p><a href="{{ route('courses.create') }}">New Course</a></p>
 
 <div class="row">
     <div class="col-4">
         <h3>Ongoing Courses</h3>
         <ul>
             @foreach ($ongoingCourses as $ongoingCourse)
-                <li><a href="courses/{{ $ongoingCourse->id }}/labs">{{ $ongoingCourse->name }}</a>
+                <li><a href="{{ route('courses.labs.index', ['course' => $ongoingCourse]) }}">{{ $ongoingCourse->name }}</a>
                     <span class="text-muted">- {{ $ongoingCourse->major }}</span>
                     <span class="text-muted">({{ $ongoingCourse->year }})</span>
-                    <a href="courses/{{ $ongoingCourse->id }}">Details</a>
+                    <a href="{{ route('courses.show', ['course' => $ongoingCourse]) }}">Details</a>
                 </li>
             @endforeach
         </ul>
@@ -28,10 +28,10 @@
         <h3>Completed Courses</h3>
         <ul>
             @foreach ($completedCourses as $completedCourse)
-                <li><a href="courses/{{ $completedCourse->id }}">{{ $completedCourse->name }}</a>
+                <li><a href="{{ route('courses.labs.index', ['course' => $completedCourse]) }}">{{ $completedCourse->name }}</a>
                     <span class="text-muted">- {{ $completedCourse->major }}</span>
                     <span class="text-muted">({{ $completedCourse->year}})</span>
-                    <a href="courses/{{ $completedCourse->id }}">Details</a>
+                    <a href="{{ route('courses.show', ['course' => $completedCourse]) }}">Details</a>
                 </li>
             @endforeach
         </ul>
@@ -41,10 +41,10 @@
         <h3>Archived Courses</h3>
         <ul>
             @foreach ($archivedCourses as $archivedCourse)
-                <li><a href="courses/{{ $archivedCourse->id }}">{{ $archivedCourse->name }}</a>
+                <li><a href="{{ route('courses.labs.index', ['course' => $archivedCourse]) }}">{{ $archivedCourse->name }}</a>
                     <span class="text-muted">- {{ $archivedCourse->major }}</span>
                     <span class="text-muted">({{ $archivedCourse->year }})</span>
-                    <a href="courses/{{ $archivedCourse->id }}">Details</a>
+                    <a href="{{ route('courses.show', ['course' => $archivedCourse]) }}">Details</a>
                 </li>
             @endforeach
         </ul>

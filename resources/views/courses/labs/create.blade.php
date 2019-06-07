@@ -9,7 +9,7 @@
     <h1>Create New Lab for <span class="text-muted">{{ $course->name }}</h1>
 
     {{-- still has to find the correct action --}}
-    <form action="/courses/{{ $course->id }}/labs" method="POST">
+    <form action="{{ route('courses.labs.store', ['course' => $course]) }}" method="POST">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" value="{{ old('title') }}" class="form-control">

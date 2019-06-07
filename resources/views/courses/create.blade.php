@@ -8,7 +8,7 @@
 
     <h1>Create Course</h1>
 
-    <form action="/courses" method="POST">
+    <form action="{{ route('courses.store') }}" method="POST">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" value="{{ old('name') }}" class="form-control">

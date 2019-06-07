@@ -22,6 +22,6 @@
     </div>
 </div>
 
-<a href="/courses/{{ $lab->course_id }}/labs/{{ $lab->id }}/assignments">assignments</a>
+<a href="{{ route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]) }}">assignments</a>
 
 @endsection

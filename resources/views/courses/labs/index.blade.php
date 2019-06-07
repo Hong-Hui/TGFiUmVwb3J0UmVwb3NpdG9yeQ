@@ -11,8 +11,8 @@
         <h1>Labs of : {{ $course->name }}
             <span class="text-muted">{{ $course->year }}</span>
         </h1>
-        <p><a href="labs/create">New Lab</a></p>
-        <p><a href="/courses">Back to Courses</a></p>
+        <p><a href="{{ route('courses.labs.create', ['course' => $course]) }}">New Lab</a></p>
+        <p><a href="{{ route('courses.index') }}">Back to Courses</a></p>
     </div>
 </div>
 
@@ -36,8 +36,8 @@
 @foreach ($course->labs as $lab)
     <div class="row">
         <div class="col-4">
-            <a href="labs/{{ $lab->id }}/assignments">{{ $lab->title }}</a>
-            <a href="labs/{{ $lab->id }}"><span class="text-muted">Details</span></a>
+            <a href="{{ route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]) }}">{{ $lab->title }}</a>
+            <a href="{{ route('courses.labs.show', ['course' => $course, 'lab' => $lab]) }}"><span class="text-muted">Details</span></a>
         </div>
         <div class="col-2">
             {{ $lab->assignments->count() }}

@@ -27,7 +27,7 @@ class LabsController extends Controller
 
     public function show(Course $course, Lab $lab)
     {
-        return view('courses.labs.show', compact('lab'));
+        return view('courses.labs.show', compact('course', 'lab'));
     }
 
     public function edit($id)

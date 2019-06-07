@@ -23,6 +23,6 @@
     </div>
 </div>
 
-<a href="/courses/{{ $course->id }}/labs">labs</a>
+<a href="{{ route('courses.labs.index', ['course' => $course]) }}">labs</a>
 
 @endsection

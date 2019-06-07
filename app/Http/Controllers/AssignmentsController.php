@@ -33,12 +33,12 @@ class AssignmentsController extends Controller
             'source' => request()->source->storeAs('public/uploads', $originalFileName)
         ]);
 
-        return redirect('/courses/' . $lab->course->id . '/labs/' . $lab->id . '/assignments');
+        return redirect('/courses/' . $course->id . '/labs/' . $lab->id . '/assignments');
     }
 
     public function show(Course $course, Lab $lab, Assignment $assignment)
     {
-        return view('courses.labs.assignments.show', compact('assignment'));
+        return view('courses.labs.assignments.show', compact('course', 'lab', 'assignment'));
     }
 
     public function edit($id)
@@ -82,7 +82,7 @@ class AssignmentsController extends Controller
         return $validatedData;
     }
 
-    // saved for update() inmplimentation
+    // saved for update() implementation
         // private function storeSource($assignment)
         // {
         //     if (request()->has('source')) {
