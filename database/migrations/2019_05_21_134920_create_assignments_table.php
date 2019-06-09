@@ -19,7 +19,7 @@ class CreateAssignmentsTable extends Migration
             $table->string('status');
             $table->string('visibility');
 
-            $table->foreign('lab_id')->references('id')->on('labs');
+            $table->foreign('lab_id')->references('id')->on('labs')->onDelete('cascade');
 
             $table->timestamps();
         });

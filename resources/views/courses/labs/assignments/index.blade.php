@@ -17,9 +17,9 @@
     </div>
 
     <div class="row">
-        <div class="col-3">Name</div>
+        <div class="col-4">Name</div>
         <div class="col-3">Owner</div>
-        <div class="col-3">Submission Date</div>
+        <div class="col-2">Submission Date</div>
         <div class="col-1">Status</div>
         <div class="col-1">Visibility</div>
         <div class="col-1">Mark</div>
@@ -29,7 +29,7 @@
 
     @foreach ($lab->assignments as $assignment)
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">{{ $assignment->title }}</a>
                 <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}"><span class="text-muted">Details</span></a>
             </div>
@@ -37,7 +37,7 @@
                 {{-- to be implimented later --}}
                 owner placeholder
             </div>
-            <div class="col-3">
+            <div class="col-2">
                 {{ $assignment->updated_at }}
             </div>
             <div class="col-1">

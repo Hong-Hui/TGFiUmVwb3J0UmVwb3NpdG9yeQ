@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
 {
+    // Start Restful
 
     public function index()
     {
@@ -19,16 +21,16 @@ class CoursesController extends Controller
 
     public function create()
     {
-        $courses = Course::all();
+        $course = new Course();
 
-        return view('courses.create', compact('courses'));
+        return view('courses.create', compact('course'));
     }
 
     public function store(Request $request)
     {
         $course = Course::create($this->validateRequest());
 
-        return redirect('courses');
+        return redirect()->route('courses.index');
     }
 
     public function show(Course $course)
@@ -36,19 +38,23 @@ class CoursesController extends Controller
         return view('courses.show', compact('course'));
     }
 
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        return view('courses.edit', compact('course'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        $course->update($this->validateRequest());
+
+        return redirect()->route('courses.show', ['course' => $course]);
     }
 
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+        $course->delete();
+
+        return redirect()->route('courses.index');
     }
 
     // End Restful

@@ -7,10 +7,11 @@ use App\Lab;
 use App\Course;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+
 
 class AssignmentsController extends Controller
 {
-
     // Start Restful
 
     public function index(Course $course, Lab $lab)
@@ -20,20 +21,18 @@ class AssignmentsController extends Controller
 
     public function create(Course $course, Lab $lab)
     {
-        return view('courses.labs.assignments.create', compact('course', 'lab'));
+        $assignment = new Assignment();
+
+        return view('courses.labs.assignments.create', compact('course', 'lab', 'assignment'));
     }
 
     public function store(Request $request, Course $course, Lab $lab)
     {
         $assignment = Assignment::create($this->validateRequest($lab));
 
-        $originalFileName = $request->source->getClientOriginalName();
+        $this->storeSource($request, $assignment);
 
-        $assignment->update([
-            'source' => request()->source->storeAs('public/uploads', $originalFileName)
-        ]);
-
-        return redirect('/courses/' . $course->id . '/labs/' . $lab->id . '/assignments');
+        return redirect()->route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]);
     }
 
     public function show(Course $course, Lab $lab, Assignment $assignment)
@@ -41,19 +40,25 @@ class AssignmentsController extends Controller
         return view('courses.labs.assignments.show', compact('course', 'lab', 'assignment'));
     }
 
-    public function edit($id)
+    public function edit(Course $course, Lab $lab, Assignment $assignment)
     {
-        //
+        return view('courses.labs.assignments.edit', compact('course', 'lab', 'assignment'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course, Lab $lab, Assignment $assignment)
     {
-        //
+        $assignment->update($this->validateRequest($lab));
+
+        $this->storeSource($request, $assignment);
+
+        return redirect()->route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]);
     }
 
-    public function destroy($id)
+    public function destroy(Course $course, Lab $lab, Assignment $assignment)
     {
-        //
+        $assignment->delete();
+
+        return redirect()->route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]);
     }
 
     // End Restful
@@ -62,9 +67,9 @@ class AssignmentsController extends Controller
     {
         $validatedData = request()->validate([
             'title' => 'required|min:10',
-            'mark' => 'sometimes',
+            'mark' => 'sometimes|max:3',
             'visibility' => 'required',
-            'source' => 'file|max:2000|
+            'source' => 'required|file|max:2000|
                 mimes:
                 doc,odt,pdf,rtf,tex,wks,wps,wpd,txt,
                 c,cpp,class,cs,h,java,sh,swift,vb,
@@ -82,14 +87,12 @@ class AssignmentsController extends Controller
         return $validatedData;
     }
 
-    // saved for update() implementation
-        // private function storeSource($assignment)
-        // {
-        //     if (request()->has('source')) {
-        //         $assignment->update([
-        //             'source' => request()->source->store('uploads', 'public')
-        //         ]);
-        //     }
-        // }
-    //
+    private function storeSource($request, $assignment)
+    {
+        $originalFileName = request()->source->getClientOriginalName();
+
+        $assignment->update([
+            'source' => request()->source->storeAs('public/uploads', $originalFileName)
+        ]);
+    }
 }

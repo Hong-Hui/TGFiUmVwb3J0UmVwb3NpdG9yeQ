@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Lab;
 use App\Course;
+
 use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
+    // Start Restful
+
     public function index(Course $course)
     {
         return view('courses.labs.index', compact('course'));
@@ -15,14 +18,16 @@ class LabsController extends Controller
 
     public function create(Course $course)
     {
-        return view('courses.labs.create', compact('course'));
+        $lab = new Lab();
+
+        return view('courses.labs.create', compact('course', 'lab'));
     }
 
     public function store(Request $request, Course $course)
     {
         $lab = Lab::create($this->validateRequest($course));
 
-        return redirect('courses/' . $course->id . '/labs');
+        return redirect()->route('courses.labs.index', ['course' => $course, 'lab' => $lab]);
     }
 
     public function show(Course $course, Lab $lab)
@@ -30,19 +35,23 @@ class LabsController extends Controller
         return view('courses.labs.show', compact('course', 'lab'));
     }
 
-    public function edit($id)
+    public function edit(Course $course, Lab $lab)
     {
-        //
+        return view('courses.labs.edit', compact('course', 'lab'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course, Lab $lab)
     {
-        //
+        $lab->update($this->validateRequest($course));
+
+        return redirect()->route('courses.labs.show', ['course' => $course, 'lab' => $lab]);
     }
 
-    public function destroy($id)
+    public function destroy(Course $course, Lab $lab)
     {
-        //
+        $lab->delete();
+
+        return redirect()->route('courses.labs.index', ['course' => $course]);
     }
 
     // End Restful

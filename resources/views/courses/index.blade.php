@@ -51,4 +51,6 @@
     </div>
 </div>
 
+{{-- course references suggestion --}}
+{{-- add books or documents as a reference --}}
 @endsection

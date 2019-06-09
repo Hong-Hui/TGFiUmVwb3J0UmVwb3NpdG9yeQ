@@ -18,7 +18,7 @@ class CreateLabsTable extends Migration
             $table->date('deadline');
             $table->string('status');
 
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
 
             $table->timestamps();
         });

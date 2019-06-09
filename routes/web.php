@@ -27,9 +27,9 @@ Route::resource('courses.labs', 'LabsController');
 Route::resource('courses.labs.assignments', 'AssignmentsController');
 
 //Users
-Route::resource('courses.teachers', 'TeachersController');
-Route::resource('courses.teachers.assistants', 'AssistantsController');
-Route::resource('courses.students', 'StudentsController');
+Route::resource('teachers', 'TeachersController');
+Route::resource('assistants', 'AssistantsController');
+Route::resource('students', 'StudentsController');
 
 //Contact
 Route::get('contact', 'ContactFormController@create')->name('contact.create');

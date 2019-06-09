@@ -7,6 +7,16 @@
 <div class="row">
     <div class="col-12">
         <h1>Details for {{ $course->name }}</h1>
+
+        <a href="{{ route('courses.edit', ['course' => $course]) }}">Edit</a>
+
+        <form action="{{ route('courses.destroy', ['course' => $course]) }}" method="POST">
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger">Delete Course</button>
+
+            @csrf
+        </form>
     </div>
 </div>
 
