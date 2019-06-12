@@ -8,7 +8,7 @@
     <div class="col-12">
         <h1>Details for {{ $assignment->title }}</h1>
 
-        {{-- <a href="{{ route('courses.labs.assignments.edit', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">Edit</a> --}}
+        <a href="{{ route('courses.labs.assignments.edit', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">Edit</a>
 
         <form action="{{ route('courses.labs.assignments.destroy', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}" method="POST">
             @method('DELETE')
