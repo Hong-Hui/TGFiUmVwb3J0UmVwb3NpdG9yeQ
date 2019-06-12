@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // Start Restful
 
     public function index(Course $course)

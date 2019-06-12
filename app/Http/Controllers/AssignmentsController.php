@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class AssignmentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // Start Restful
 
     public function index(Course $course, Lab $lab)
