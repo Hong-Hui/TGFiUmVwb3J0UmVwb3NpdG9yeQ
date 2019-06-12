@@ -7,8 +7,6 @@ use App\Lab;
 use App\Course;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-
 
 class AssignmentsController extends Controller
 {
@@ -30,7 +28,7 @@ class AssignmentsController extends Controller
     {
         $assignment = Assignment::create($this->validateRequest($lab));
 
-        $this->storeSource($request, $assignment);
+        $this->storeSource($assignment);
 
         return redirect()->route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]);
     }
@@ -49,7 +47,7 @@ class AssignmentsController extends Controller
     {
         $assignment->update($this->validateRequest($lab));
 
-        $this->storeSource($request, $assignment);
+        $this->storeSource($assignment);
 
         return redirect()->route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]);
     }
@@ -87,12 +85,25 @@ class AssignmentsController extends Controller
         return $validatedData;
     }
 
-    private function storeSource($request, $assignment)
+    private function storeSource($assignment)
     {
-        $originalFileName = request()->source->getClientOriginalName();
+        $file = request()->file('source');
+        $ext = $file->getClientOriginalExtension();
+
+        $fileName = '[' . $assignment->lab->title . '] - ownerplaceholder - ' . $assignment->title . '.' .$ext;
 
         $assignment->update([
-            'source' => request()->source->storeAs('public/uploads', $originalFileName)
+            'source' => request()->source->storeAs('uploads/' . $assignment->lab->title, $fileName, 'public')
         ]);
+    }
+
+    //
+
+    public function fileDownload($id)
+    {
+        $assignment = Assignment::findOrFail($id);
+
+        $pathToFile = public_path('storage/' . $assignment->source);
+        return response()->download($pathToFile);
     }
 }

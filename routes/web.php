@@ -34,3 +34,5 @@ Route::resource('students', 'StudentsController');
 //Contact
 Route::get('contact', 'ContactFormController@create')->name('contact.create');
 Route::post('contact', 'ContactFormController@store')->name('contact.store');
+
+Route::get('/givefile/{assignment}', 'AssignmentsController@fileDownload');
