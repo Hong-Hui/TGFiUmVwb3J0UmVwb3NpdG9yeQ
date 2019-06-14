@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+
     protected $guarded = [];
 
-    // Relationships
     public function labs()
     {
         return $this->hasMany(\App\Lab::class);
     }
 
-    // Scopes
     public function scopeOngoing($query)
     {
         return $query->where('status', 'ongoing');
@@ -29,4 +28,5 @@ class Course extends Model
     {
         return $query->where('status', 'archived');
     }
+
 }
