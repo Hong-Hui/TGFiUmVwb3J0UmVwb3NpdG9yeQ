@@ -6,12 +6,15 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateAssignmentsTable extends Migration
 {
+
     public function up()
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::create('assignments', function (Blueprint $table)
+        {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('lab_id');
+            $table->unsignedBigInteger('user_id');
 
             $table->string('title');
             $table->string('source');
@@ -20,6 +23,7 @@ class CreateAssignmentsTable extends Migration
             $table->string('visibility');
 
             $table->foreign('lab_id')->references('id')->on('labs')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -29,4 +33,5 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::dropIfExists('assignments');
     }
+
 }

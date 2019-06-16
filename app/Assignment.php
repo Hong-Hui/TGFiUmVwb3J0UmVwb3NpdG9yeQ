@@ -11,7 +11,12 @@ class Assignment extends Model
 
     public function lab()
     {
-        return $this->belongsTo(\App\Lab::class);
+        return $this->belongsTo(Lab::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

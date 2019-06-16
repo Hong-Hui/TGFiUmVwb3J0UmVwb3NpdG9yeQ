@@ -86,6 +86,7 @@ class AssignmentsController extends Controller
 
         $validatedData['status'] = 'pending';
         $validatedData['lab_id'] = $lab->id;
+        $validatedData['user_id'] = auth()->user()->id;
 
         return $validatedData;
     }

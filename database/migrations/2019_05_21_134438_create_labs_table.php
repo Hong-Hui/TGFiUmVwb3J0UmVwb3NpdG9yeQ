@@ -6,9 +6,11 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateLabsTable extends Migration
 {
+
     public function up()
     {
-        Schema::create('labs', function (Blueprint $table) {
+        Schema::create('labs', function (Blueprint $table)
+        {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('course_id');
@@ -28,4 +30,5 @@ class CreateLabsTable extends Migration
     {
         Schema::dropIfExists('labs');
     }
+
 }
