@@ -11,7 +11,12 @@ class Course extends Model
 
     public function labs()
     {
-        return $this->hasMany(\App\Lab::class);
+        return $this->hasMany(Lab::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     public function scopeOngoing($query)

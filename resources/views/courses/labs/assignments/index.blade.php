@@ -34,8 +34,7 @@
                 <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}"><span class="text-muted">Details</span></a>
             </div>
             <div class="col-3">
-                {{-- to be implimented later --}}
-                owner placeholder
+                {{ $assignment->user->name }}
             </div>
             <div class="col-2">
                 {{ $assignment->updated_at }}

@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCoursesTable extends Migration
 {
+
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
@@ -13,10 +14,10 @@ class CreateCoursesTable extends Migration
 
             $table->string('name'); // i.e Project Management
             $table->string('major'); // i.e Software Engineering
-            $table->string('year');
-            $table->string('section'); // fall || winter
-            $table->string('group'); // in case there exist many
-            $table->string('status'); // ongoing || finished
+            $table->string('year'); // i.e 1999
+            $table->string('section'); // fall || spring
+            $table->string('group'); // if there exist many classes for the same course
+            $table->string('status'); // ongoing || completed || archived
 
             $table->timestamps();
         });
@@ -26,4 +27,5 @@ class CreateCoursesTable extends Migration
     {
         Schema::dropIfExists('courses');
     }
+
 }
