@@ -27,8 +27,8 @@
         <p><strong>Name</strong> {{ $course->name }}</p>
         <p><strong>Major</strong> {{ $course->major }}</p>
         <p><strong>Year</strong> {{ $course->year }}</p>
+        <p><strong>Semester</strong> {{ $course->semester }}</p>
         <p><strong>Section</strong> {{ $course->section }}</p>
-        <p><strong>Group</strong> {{ $course->group }}</p>
         <p><strong>Status</strong> {{ $course->status }}</p>
     </div>
 </div>

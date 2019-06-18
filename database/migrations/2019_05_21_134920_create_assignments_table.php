@@ -17,10 +17,11 @@ class CreateAssignmentsTable extends Migration
             $table->unsignedBigInteger('user_id');
 
             $table->string('title');
-            $table->string('source');
+            $table->string('source')->nulllable();
             $table->smallInteger('mark')->nullable();
             $table->string('status');
             $table->string('visibility');
+            $table->longText('comment')->nullable();
 
             $table->foreign('lab_id')->references('id')->on('labs')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

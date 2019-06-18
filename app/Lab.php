@@ -11,12 +11,12 @@ class Lab extends Model
 
     public function course()
     {
-        return $this->belongsTo(\App\Course::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function assignments()
     {
-        return $this->hasMany(\App\Assignment::class);
+        return $this->hasMany(Assignment::class);
     }
 
 }

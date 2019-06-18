@@ -65,11 +65,11 @@ class LabsController extends Controller
     {
         $validatedData = request()->validate([
             'title' => 'required|min:5',
-            'max_members' => 'required',
-            'deadline' => 'required',
+            'max_members' => 'required|numeric',
+            'deadline' => 'required|date',
         ]);
 
-        $validatedData['status'] = 'partially marked';
+        $validatedData['status'] = 'open';
         $validatedData['course_id'] = $course->id;
 
         return $validatedData;

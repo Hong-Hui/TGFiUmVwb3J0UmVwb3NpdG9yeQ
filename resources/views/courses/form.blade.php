@@ -17,15 +17,15 @@
 </div>
 
 <div class="form-group">
-    <label for="section">Section</label>
-    <input type="text" name="section" value="{{ old('section') ?? $course->section }}" class="form-control">
-    <div>{{ $errors->first('section') }}</div>
+    <label for="semester">Semester</label>
+    <input type="text" name="semester" value="{{ old('semester') ?? $course->semester }}" class="form-control">
+    <div>{{ $errors->first('semester') }}</div>
 </div>
 
 <div class="form-group">
-    <label for="group">Group</label>
-    <input type="text" name="group" value="{{ old('group') ?? $course->group }}" class="form-control">
-    <div>{{ $errors->first('group') }}</div>
+    <label for="section">Section</label>
+    <input type="text" name="section" value="{{ old('section') ?? $course->section }}" class="form-control">
+    <div>{{ $errors->first('section') }}</div>
 </div>
 
 <div class="form-group">

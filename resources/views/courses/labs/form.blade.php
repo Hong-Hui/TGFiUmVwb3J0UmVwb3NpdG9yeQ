@@ -7,7 +7,7 @@
 {{-- deadline has to be better formatted --}}
 <div class="form-group">
     <label for="deadline">Deadline</label>
-    <input type="text" name="deadline" value="{{ old('deadline') ?? $lab->deadline }}" class="form-control">
+    <input type="date" name="deadline" value="{{ old('deadline') ?? $lab->deadline}}" class="form-control">
     <div>{{ $errors->first('deadline') }}</div>
 </div>
 

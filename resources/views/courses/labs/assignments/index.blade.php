@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-4">
                 <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">{{ $assignment->title }}</a>
-                <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}"><span class="text-muted">Details</span></a>
+                {{-- <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}"><span class="text-muted">Details</span></a> --}}
             </div>
             <div class="col-3">
                 {{ $assignment->user->name }}
@@ -40,7 +40,7 @@
                 {{ $assignment->updated_at }}
             </div>
             <div class="col-1">
-                {{ $assignment->status }}
+                {{ $assignment->mark ? 'marked' : 'pending' }}
             </div>
             <div class="col-1">
                 {{ $assignment->visibility }}

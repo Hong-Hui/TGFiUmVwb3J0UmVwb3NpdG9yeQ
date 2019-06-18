@@ -35,4 +35,19 @@ class User extends Authenticatable
         return $this->hasMany(Assignment::class);
     }
 
+    public function scopeTeachers($query)
+    {
+        return $query->role('teacher');
+    }
+
+    public function scopeAssistants($query)
+    {
+        return $query->role('assistant');
+    }
+
+    public function scopeStudents($query)
+    {
+        return $query->role('student');
+    }
+
 }

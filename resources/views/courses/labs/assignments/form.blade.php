@@ -5,12 +5,6 @@
 </div>
 
 <div class="form-group">
-    <label for="source">Source</label>
-    <input type="file" name="source">
-    <div>{{ $errors->first('source') }}</div>
-</div>
-
-<div class="form-group">
     <label for="visibility">Visibility</label>
     <select name="visibility" id="visibility" class="form-control">
         <option value="" disabled>Visibility</option>

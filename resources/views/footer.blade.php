@@ -27,7 +27,7 @@
                         <a href="#!">Overview</a>
                     </li>
                     <li>
-                        <a href="#!">User Manual</a>
+                        <a href="{{ route('manual_Index') }}">User Manual</a>
                     </li>
                 </ul>
             </div>

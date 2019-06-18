@@ -9,14 +9,15 @@ class CreateCoursesTable extends Migration
 
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table)
+        {
             $table->bigIncrements('id');
 
             $table->string('name'); // i.e Project Management
             $table->string('major'); // i.e Software Engineering
             $table->string('year'); // i.e 1999
-            $table->string('section'); // fall || spring
-            $table->string('group'); // if there exist many classes for the same course
+            $table->string('semester'); // winter || spring || summer || fall
+            $table->string('section'); // if there exist many classes for the same course
             $table->string('status'); // ongoing || completed || archived
 
             $table->timestamps();

@@ -24,7 +24,7 @@
         Submissions
     </div>
     <div class="col-4">
-        Deadline
+        Deadlines
     </div>
     <div class="col-2">
         Status
@@ -46,10 +46,15 @@
             {{ $lab->deadline }}
         </div>
         <div class="col-2">
+            {{-- will be removed from the database schema in a future release, as it's a dependant result --}}
             {{ $lab->status }}
         </div>
     </div>
 @endforeach
+
+<hr>
+
+<a href="#!">students index placeholder</a>
 
 @endsection
 

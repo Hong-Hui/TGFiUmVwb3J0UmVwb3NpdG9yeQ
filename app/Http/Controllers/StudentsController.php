@@ -13,7 +13,9 @@ class StudentsController extends Controller
 
     public function index()
     {
-        return view('students.index');
+        $students = \App\User::students()->get();
+
+        return view('students.index', compact('students'));
     }
 
     public function create()

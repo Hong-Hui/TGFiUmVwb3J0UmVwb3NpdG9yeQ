@@ -7,7 +7,7 @@ class LabsTableSeeder extends Seeder
 
     public function run()
     {
-        factory(\App\Lab::class, 15)->create();
+        factory(\App\Lab::class, 100)->create();
     }
 
 }

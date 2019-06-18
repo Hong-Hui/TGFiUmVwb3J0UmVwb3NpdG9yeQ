@@ -33,7 +33,7 @@ class AssignmentsController extends Controller
     {
         $assignment = Assignment::create($this->validateRequest($lab));
 
-        $this->storeSource($assignment);
+        $this->storeSource($course, $lab, $assignment);
 
         return redirect()->route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]);
     }
@@ -52,7 +52,7 @@ class AssignmentsController extends Controller
     {
         $assignment->update($this->validateRequest($lab));
 
-        $this->storeSource($assignment);
+        $this->storeSource($course, $lab, $assignment);
 
         return redirect()->route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]);
     }
@@ -70,9 +70,9 @@ class AssignmentsController extends Controller
     {
         $validatedData = request()->validate([
             'title' => 'required|min:10',
-            'mark' => 'sometimes|max:3',
+            'mark' => 'sometimes',
             'visibility' => 'required',
-            'source' => 'required|file|max:2000|
+            'source' => 'sometimes|file|max:2000|
                 mimes:
                 doc,odt,pdf,rtf,tex,wks,wps,wpd,txt,
                 c,cpp,class,cs,h,java,sh,swift,vb,
@@ -82,6 +82,7 @@ class AssignmentsController extends Controller
                 jpeg,jpg,png,bmp,
                 dat,db,log,sql,xml,
                 7z,zip,rar',
+            'comment' => 'sometimes',
         ]);
 
         $validatedData['status'] = 'pending';
@@ -91,19 +92,30 @@ class AssignmentsController extends Controller
         return $validatedData;
     }
 
-    private function storeSource($assignment)
+    private function storeSource($course, $lab, $assignment)
     {
-        $file = request()->file('source');
-        $ext = $file->getClientOriginalExtension();
+        $storagePath = 'uploads/'
+        . $course->name  . '/'
+        . $course->year . '/'
+        . $course->semester . '/'
+        . $course->section . '/'
+        . $lab->title;
 
-        $fileName = '[' . $assignment->lab->title . '] - ownerplaceholder - ' . $assignment->title . '.' .$ext;
+        if ($file = request()->file('source')) {
+            $ext = $file->getClientOriginalExtension();
 
-        $assignment->update([
-            'source' => request()->source->storeAs('uploads/' . $assignment->lab->title, $fileName, 'public')
-        ]);
+            $fileName =
+            '[' . $assignment->lab->title . '] - '
+            . $assignment->user->name . ' - '
+            . $assignment->title . '.' . $ext;
+
+            $assignment->update([
+                'source' => request()->source->storeAs($storagePath, $fileName, 'public')
+            ]);
+        }
     }
 
-    //
+    // Download
 
     public function fileDownload($id)
     {

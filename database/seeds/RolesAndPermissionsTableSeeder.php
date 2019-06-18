@@ -37,11 +37,16 @@ class RolesAndPermissionsTableSeeder extends Seeder
 
         foreach ($permissions as $permission)
         {
-            Permission::create(['name' => $permission]);
+            // if (!Permission::where('name', $permission)) {
+                Permission::create(['name' => $permission]);
+            // }
         }
 
-        foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+        foreach ($roles as $role)
+        {
+            // if (!Role::where('name', $role)) {
+                Role::create(['name' => $role]);
+            // }
         }
     }
 

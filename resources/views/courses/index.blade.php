@@ -51,6 +51,8 @@
     </div>
 </div>
 
+<hr>
+
 {{-- course references suggestion --}}
 {{-- add books or documents as a reference --}}
 @endsection
