@@ -9,24 +9,43 @@ class RolesAndPermissionsTableSeeder extends Seeder
 
     public function run()
     {
-        $permissions = [
-            'course-show',
-            'course-create',
-            'course-edit',
-            'course-delete',
+        // thinking about putting these in the database, as the number can scale exponentially.
 
-            'lab-show',
-            'lab-create',
-            'lab-edit',
-            'lab-delete',
+        // $accountPermissions = [
+        //     'create assistant accounts',
+        //     'delete assistant accounts',
+        //     'delete accounts',
+        //     'delete own accounts',
+        // ];
 
-            'assignment-show',
-            'assignment-create',
-            'assignment-edit',
-            'assignment-delete',
+        $coursePermissions = [
+            'view courses',
+            'view own courses',
+            'create courses',
+            'edit courses',
+            'edit own courses',
+            'delete courses',
+            'delete own courses',
+        ];
 
-            'assistant-create',
-            'assistant-delete',
+        $labPermissions = [
+            'view labs',
+            'view own labs',
+            'create labs',
+            'edit labs',
+            'edit own labs',
+            'delete labs',
+            'delete own labs',
+        ];
+
+        $assignmentPermissions = [
+            'view assignments',
+            'view own assignments',
+            'create assignments',
+            'edit assignments',
+            'edit own assignments',
+            'delete assignments',
+            'delete own assignments',
         ];
 
         $roles = [
@@ -35,19 +54,55 @@ class RolesAndPermissionsTableSeeder extends Seeder
             'assistant',
         ];
 
-        foreach ($permissions as $permission)
-        {
-            // if (!Permission::where('name', $permission)) {
+        foreach ($coursePermissions as $permission) {
+            if (!Permission::where('name', $permission)->first()) {
                 Permission::create(['name' => $permission]);
-            // }
+            }
+        }
+        foreach ($labPermissions as $permission) {
+            if (!Permission::where('name', $permission)->first()) {
+                Permission::create(['name' => $permission]);
+            }
+        }
+        foreach ($assignmentPermissions as $permission) {
+            if (!Permission::where('name', $permission)->first()) {
+                Permission::create(['name' => $permission]);
+            }
         }
 
-        foreach ($roles as $role)
-        {
-            // if (!Role::where('name', $role)) {
+        foreach ($roles as $role) {
+            if (!Role::where('name', $role)->first()) {
                 Role::create(['name' => $role]);
-            // }
+            }
         }
-    }
 
+        Role::where('name', 'teacher')->first()->syncPermissions([
+            'view courses',
+            'create courses',
+            'edit courses',
+            'delete courses',
+
+            'view labs',
+            'create labs',
+            'edit labs',
+            'delete labs',
+
+            'view assignments',
+            'edit assignments',
+            'delete assignments',
+        ]);
+        Role::where('name', 'student')->first()->syncPermissions([
+            'view courses',
+
+            'view labs',
+
+            'view own assignments',
+            'create assignments',
+            'edit own assignments',
+            'delete own assignments',
+        ]);
+        // Role::where('name', 'assistant')->first()->syncPermissions([
+
+        // ]);
+    }
 }
