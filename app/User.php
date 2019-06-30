@@ -30,6 +30,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class);
     }
 
+    public function labs()
+    {
+        return $this->belongsToMany(Lab::class);
+    }
+
     public function assignments()
     {
         return $this->hasMany(Assignment::class);

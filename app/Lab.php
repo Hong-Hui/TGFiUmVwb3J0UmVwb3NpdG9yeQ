@@ -19,4 +19,9 @@ class Lab extends Model
         return $this->hasMany(Assignment::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }
