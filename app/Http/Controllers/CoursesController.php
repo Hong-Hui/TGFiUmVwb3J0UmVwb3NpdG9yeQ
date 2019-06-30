@@ -17,15 +17,17 @@ class CoursesController extends Controller
 
     public function index()
     {
-        $ongoingCourses = Course::ongoing()->get();
-        $completedCourses = Course::completed()->get();
-        $archivedCourses = Course::archived()->get();
+        $ongoingCourses = Course::ongoing()->orderBy('year', 'desc')->get();
+        $completedCourses = Course::completed()->orderBy('year', 'desc')->get();
+        $archivedCourses = Course::archived()->orderBy('year', 'desc')->get();
 
         return view('courses.index', compact('ongoingCourses', 'completedCourses', 'archivedCourses'));
     }
 
     public function create()
     {
+        $this->authorize('create', Course::class);
+
         $course = new Course();
 
         return view('courses.create', compact('course'));
@@ -33,27 +35,32 @@ class CoursesController extends Controller
 
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $this->authorize('create', Course::class);
 
         $course = Course::create($this->validateRequest());
-
-        $course->users()->sync([$user->id]);
+        $course->users()->sync([auth()->user()->id]);
 
         return redirect()->route('courses.index');
     }
 
     public function show(Course $course)
     {
+        $this->authorize('view', $course);
+
         return view('courses.show', compact('course'));
     }
 
     public function edit(Course $course)
     {
+        $this->authorize('update', $course);
+
         return view('courses.edit', compact('course'));
     }
 
     public function update(Request $request, Course $course)
     {
+        $this->authorize('update', $course);
+
         $course->update($this->validateRequest());
 
         return redirect()->route('courses.show', ['course' => $course]);
@@ -61,6 +68,8 @@ class CoursesController extends Controller
 
     public function destroy(Course $course)
     {
+        $this->authorize('delete', $course);
+
         $course->delete();
 
         return redirect()->route('courses.index');

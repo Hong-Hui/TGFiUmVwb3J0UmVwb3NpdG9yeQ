@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Lab;
 use App\Course;
-
+use App\Lab;
 use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,6 +23,8 @@ class LabsController extends Controller
 
     public function create(Course $course)
     {
+        $this->authorize('create', Lab::class);
+
         $lab = new Lab();
 
         return view('courses.labs.create', compact('course', 'lab'));
@@ -30,6 +32,8 @@ class LabsController extends Controller
 
     public function store(Request $request, Course $course)
     {
+        $this->authorize('create', Lab::class);
+
         $lab = Lab::create($this->validateRequest($course));
 
         return redirect()->route('courses.labs.index', ['course' => $course, 'lab' => $lab]);
@@ -37,16 +41,22 @@ class LabsController extends Controller
 
     public function show(Course $course, Lab $lab)
     {
+        $this->authorize('view', $lab);
+
         return view('courses.labs.show', compact('course', 'lab'));
     }
 
     public function edit(Course $course, Lab $lab)
     {
+        $this->authorize('update', $lab);
+
         return view('courses.labs.edit', compact('course', 'lab'));
     }
 
     public function update(Request $request, Course $course, Lab $lab)
     {
+        $this->authorize('update', $lab);
+
         $lab->update($this->validateRequest($course));
 
         return redirect()->route('courses.labs.show', ['course' => $course, 'lab' => $lab]);
@@ -54,6 +64,8 @@ class LabsController extends Controller
 
     public function destroy(Course $course, Lab $lab)
     {
+        $this->authorize('delete', $lab);
+
         $lab->delete();
 
         return redirect()->route('courses.labs.index', ['course' => $course]);
@@ -74,4 +86,5 @@ class LabsController extends Controller
 
         return $validatedData;
     }
+
 }
