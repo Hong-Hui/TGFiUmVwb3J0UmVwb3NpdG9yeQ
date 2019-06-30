@@ -15,7 +15,7 @@
                 <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Latest Modification</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <p>12/06/2019</p>
+                        <p>29/06/2019</p>
                     </li>
                 </ul>
             </div>

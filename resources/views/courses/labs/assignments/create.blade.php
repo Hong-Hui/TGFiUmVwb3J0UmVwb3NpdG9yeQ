@@ -6,18 +6,36 @@
 
 {{-- Assignments.create placeholder --}}
 
-    <h1>Create Assignment for <span class="text-muted">{{ $lab->title }}</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
 
-    <form action="{{ route('courses.labs.assignments.store', ['course' => $course, 'lab' => $lab]) }}" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="source">Source</label>
-            <input type="file" name="source">
-            <div>{{ $errors->first('source') }}</div>
+                <div class="card-header">
+
+                    <h4>Submit Assignment in <span class="badge">{{ $lab->title }}</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form action="{{ route('courses.labs.assignments.store', ['course' => $course, 'lab' => $lab]) }}"
+                        method="POST" enctype="multipart/form-data">
+                        @include('courses.labs.assignments.form')
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-2 offset-md-2">
+                                <button type="submit" class="btn btn-success">Create</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
         </div>
-
-        @include('courses.labs.assignments.form')
-
-        <button type="submit" class="btn btn-primary">Create</button>
-    </form>
+    </div>
+</div>
 
 @endsection

@@ -8,16 +8,21 @@
     <div class="col-12">
         <h1>Details for {{ $assignment->title }}</h1>
 
-        <a href="{{ route('courses.labs.assignments.edit', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">Edit</a>
+        <p><a
+                href="{{ route('courses.labs.assignments.edit', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">Edit</a>
+        </p>
+        <p><a href="{{ route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]) }}">Index</a></p>
 
-        <form action="{{ route('courses.labs.assignments.destroy', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}" method="POST">
+        <form
+            action="{{ route('courses.labs.assignments.destroy', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}"
+            method="POST">
             @method('DELETE')
 
-            <button type="submit" class="btn btn-danger">Delete Assignment</button>
+            <button type="submit" class="btn btn-danger mb-4">Delete Assignment</button>
 
             @csrf
         </form>
-        <a href="/givefile/{{ $assignment->id }}">get file</a>
+        <p><a href="/givefile/{{ $assignment->id }}">get file</a></p>
     </div>
 </div>
 
