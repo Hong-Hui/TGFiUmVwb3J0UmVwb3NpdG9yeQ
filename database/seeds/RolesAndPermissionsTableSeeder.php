@@ -52,6 +52,7 @@ class RolesAndPermissionsTableSeeder extends Seeder
             'teacher',
             'student',
             'assistant',
+            'guest',
         ];
 
         foreach ($coursePermissions as $permission) {
@@ -104,5 +105,9 @@ class RolesAndPermissionsTableSeeder extends Seeder
         // Role::where('name', 'assistant')->first()->syncPermissions([
 
         // ]);
+        // Role::where('name', 'guest')->first()->syncPermissions([
+
+        // ]);
+
     }
 }
