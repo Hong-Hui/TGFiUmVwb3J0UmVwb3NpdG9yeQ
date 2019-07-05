@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \App\User;
 use Illuminate\Http\Request;
 
 class TeachersController extends Controller
@@ -13,12 +14,14 @@ class TeachersController extends Controller
 
     public function index()
     {
-        return view('teachers.index');
+        $teachers = User::teachers()->paginate(20);
+
+        return view('teachers.index', compact('teachers'));
     }
 
     public function create()
     {
-        //
+
     }
 
     public function store(Request $request)

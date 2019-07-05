@@ -20,7 +20,9 @@ class AssignmentsController extends Controller
     {
         // Middleware this for members only (once the right policies are established)
 
-        return view('courses.labs.assignments.index', compact('course', 'lab'));
+        $assignments = Assignment::where('lab_id', $lab->id)->paginate(15);
+
+        return view('courses.labs.assignments.index', compact('course', 'lab', 'assignments'));
     }
 
     public function create(Course $course, Lab $lab)
@@ -86,7 +88,7 @@ class AssignmentsController extends Controller
     {
         //still has a problem where some extentions are not accepted even after being registered
         $validatedData = request()->validate([
-            'title' => 'required|min:10',
+            'title' => 'required',
             'mark' => 'sometimes',
             'visibility' => 'required',
             'source' => 'sometimes|max:2000|

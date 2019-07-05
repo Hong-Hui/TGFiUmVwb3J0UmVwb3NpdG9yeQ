@@ -1,4 +1,5 @@
 <?php
+use PharIo\Manifest\License;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,13 @@ Route::get('/user_manual/manual_Student_Permissions', function () {
 Route::get('/user_manual/manual_Teacher_Permissions', function () {
     return view('user_manual/manual_Teacher_Permissions');
 })->name('manual_Teacher_Permissions');
+
+// License
+Route::get('/user_manual/license', function() {
+    return view('/user_manual/license');
+})->name('license');
+
+// Overview
+Route::get('/user_manual/overview', function () {
+    return view('user_manual/overview');
+})->name('overview');

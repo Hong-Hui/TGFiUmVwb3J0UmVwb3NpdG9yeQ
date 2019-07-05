@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -39,6 +38,7 @@ class CoursesController extends Controller
 
         $course = Course::create($this->validateRequest());
         $course->users()->sync([auth()->user()->id]);
+        $course->status = 'ongoing';
 
         return redirect()->route('courses.index');
     }
@@ -60,6 +60,8 @@ class CoursesController extends Controller
     public function update(Request $request, Course $course)
     {
         $this->authorize('update', $course);
+
+        $validateRequest = $this->validateRequest();
 
         $course->update($this->validateRequest());
 

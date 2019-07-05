@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use \App\User;
+use \App\Course;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
@@ -11,11 +13,11 @@ class StudentsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Course $course)
     {
-        $students = \App\User::students()->get();
+        $students = User::students()->paginate(20);
 
-        return view('students.index', compact('students'));
+        return view('students.index', compact('students', 'course'));
     }
 
     public function create()

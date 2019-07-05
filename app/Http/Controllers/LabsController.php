@@ -18,7 +18,9 @@ class LabsController extends Controller
 
     public function index(Course $course)
     {
-        return view('courses.labs.index', compact('course'));
+        $labs = Lab::find($course->id)->paginate(15);
+
+        return view('courses.labs.index', compact('course', 'labs'));
     }
 
     public function create(Course $course)
@@ -36,7 +38,7 @@ class LabsController extends Controller
 
         $lab = Lab::create($this->validateRequest($course));
 
-        return redirect()->route('courses.labs.index', ['course' => $course, 'lab' => $lab]);
+        return redirect()->route('courses.labs.index', ['course' => $course]);
     }
 
     public function show(Course $course, Lab $lab)
@@ -76,8 +78,8 @@ class LabsController extends Controller
     private function validateRequest($course)
     {
         $validatedData = request()->validate([
-            'title' => 'required|min:5',
-            'max_members' => 'required|numeric',
+            'title' => 'required',
+            'max_members' => 'required',
             'deadline' => 'required|date',
         ]);
 
