@@ -8,9 +8,9 @@
 
 <div class="row">
     <div class="col-12">
-        <h1>Labs of : {{ $course->name }}
+        <h2>Labs of : {{ $course->name }}
             <span class="text-muted">{{ $course->year }}</span>
-        </h1>
+        </h2>
         <p><a href="{{ route('courses.labs.create', ['course' => $course]) }}">New Lab</a></p>
         <p><a href="{{ route('courses.index') }}">Back to Courses</a></p>
     </div>
@@ -43,7 +43,7 @@
 
                 <div class="card-body">
 
-                    @foreach ($course->labs as $lab)
+                    @foreach ($labs as $lab)
                         <div class="row">
                             <div class="col-4">
                                 <a href="{{ route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]) }}">{{ $lab->title }}</a>
@@ -70,7 +70,8 @@
 
 <hr>
 
-<a href="#!">students index placeholder</a>
+{{-- Needs to display students of this course only (now it displays all) --}}
+<a href="{{ route('students.index') }}">Students Index</a>
 
 @endsection
 

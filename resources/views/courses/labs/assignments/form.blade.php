@@ -11,7 +11,7 @@
     <label for="title" class="col-md-2 col-form-label text-md-right">Title</label>
 
     <div class="col-md-8">
-        <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}">
+        <input id="title" type="text" class="form-control" name="title" value="{{ old('title') ?? $assignment->title }}">
         <div>{{ $errors->first('title') }}</div>
     </div>
 </div>

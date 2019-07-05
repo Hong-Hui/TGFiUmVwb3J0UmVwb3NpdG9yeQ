@@ -8,9 +8,9 @@
 
 <div class="row">
     <div class="col-12">
-        <h1>Assignments of : {{ $lab->title }}
+        <h2>Assignments of : {{ $lab->title }}
             <span class="text-muted badge badge-warning">Submit before {{ $lab->deadline }}</span>
-        </h1>
+        </h2>
         <p><a href="{{ route('courses.labs.assignments.create', ['course' => $course, 'lab' => $lab]) }}">New
                 Assignment</a></p>
         <p><a href="{{ route('courses.labs.index', ['course' => $course]) }}">Back to labs</a></p>
@@ -51,13 +51,11 @@
 
                 <div class="card-body">
 
-                    @foreach ($lab->assignments as $assignment)
+                    @foreach ($assignments as $assignment)
                     <div class="row">
                         <div class="col-4">
                             <a
                                 href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}">{{ $assignment->title }}</a>
-                            {{-- <a href="{{ route('courses.labs.assignments.show', ['course' => $course, 'lab' => $lab, 'assignment' => $assignment]) }}"><span
-                                class="text-muted">Details</span></a> --}}
                         </div>
                         <div class="col-3">
                             {{ $assignment->user->name }}
@@ -72,10 +70,18 @@
                             {{ $assignment->visibility }}
                         </div>
                         <div class="col-1">
-                            {{ $assignment->mark }}
+                            {{ $assignment->mark ?? 'pending' }}
                         </div>
                     </div>
                     @endforeach
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            {{ $assignments->links() }}
+                        </div>
+                    </div>
 
                 </div>
 

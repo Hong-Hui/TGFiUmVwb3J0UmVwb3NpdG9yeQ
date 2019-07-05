@@ -1,17 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.card')
 
-@section('title', 'Create Lab')
+@section('card_header')
 
-@section('content')
+<h4>Create Lab for <span class="badge">{{ $course->name }}</h4>
 
-{{-- courses.labs.create placeholder --}}
+@endsection
 
-<h1>Create Lab for <span class="text-muted">{{ $course->name }}</h1>
+@section('card_body')
 
 <form action="{{ route('courses.labs.store', ['course' => $course]) }}" method="POST">
     @include('courses.labs.form')
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <div class="form-group row mb-0">
+        <div class="col-md-2 offset-md-2">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </div>
 </form>
 
 @endsection

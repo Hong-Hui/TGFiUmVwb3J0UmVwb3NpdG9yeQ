@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Lab Report Repository HomePage</h1>
+    <h4>Lab Report Repository Users Dashboard</h4>
 @endsection

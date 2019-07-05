@@ -8,7 +8,9 @@
     <div class="col-12">
         <h1>Details for {{ $course->name }}</h1>
 
-        <a href="{{ route('courses.edit', ['course' => $course]) }}">Edit</a>
+        <p><a href="{{ route('courses.edit', ['course' => $course]) }}">Edit</a></p>
+
+        <p><a href="{{ route('courses.index') }}">Index</a></p>
 
         <form action="{{ route('courses.destroy', ['course' => $course]) }}" method="POST">
             @method('DELETE')

@@ -8,6 +8,9 @@
                     <li>
                         <a href="https://github.com/Hong-Hui/TGFiUmVwb3J0UmVwb3NpdG9yeQ">0.0.1</a>
                     </li>
+                    <li>
+                        <a href="{{ route('license') }}">License</a>
+                    </li>
                 </ul>
             </div>
             <hr class="clearfix w-100 d-md-none">
@@ -24,7 +27,7 @@
                 <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Documentation</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#!">Overview</a>
+                        <a href="{{ route('overview') }}">Overview</a>
                     </li>
                     <li>
                         <a href="{{ route('manual_Index') }}">User Manual</a>
@@ -34,6 +37,6 @@
         </div>
     </div>
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="{{ route('home') }}">Lab Report Repository</a>
+        <a href="{{ route('license') }}">Lab Report Repository</a>
     </div>
 </footer>
