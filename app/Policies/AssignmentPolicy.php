@@ -27,10 +27,15 @@ class AssignmentPolicy
 
     public function create(User $user)
     {
+        $lab = request()->lab;
+
         if ($user->can('create assignments')) {
-            return true;
-        }
-        if ($user->can('override deadlines')) { // not implemented
+            if ($lab->hasExpired()) {
+                // if ($user->can('override deadlines')) {  // not implemented.
+                //     return true;
+                // }
+                return false;
+            }
             return true;
         }
         return false;
@@ -41,10 +46,13 @@ class AssignmentPolicy
         if ($user->can('edit assignments')) {
             return true;
         }
-        if ($assignment->mark != null) {
-            return false;
+        if ($assignment->mark == null) {
+            return true;
         }
         if ($user->can('edit own assignments')) {
+            if (!$assignment->lab->hasExpired()) {
+                return true;
+            }
             return $user->id == $assignment->user_id;
         }
         return false;

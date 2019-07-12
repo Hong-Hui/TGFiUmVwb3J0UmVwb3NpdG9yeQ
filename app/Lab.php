@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Lab extends Model
 {
@@ -22,6 +23,11 @@ class Lab extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function hasExpired()
+    {
+        return Carbon::now() > $this->deadline;
     }
 
 }
