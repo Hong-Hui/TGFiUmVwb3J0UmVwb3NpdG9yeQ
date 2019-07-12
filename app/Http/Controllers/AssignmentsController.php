@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Assignment;
 use App\Lab;
 use App\Course;
+use App\Policies\AssignmentPolicy;
 use Illuminate\Http\Request;
 
 class AssignmentsController extends Controller
@@ -20,7 +21,7 @@ class AssignmentsController extends Controller
     {
         // Middleware this for members only (once the right policies are established)
 
-        $assignments = Assignment::where('lab_id', $lab->id)->paginate(15);
+        $assignments = $lab->assignments()->orderBy('mark', 'desc')->paginate(15);
 
         return view('courses.labs.assignments.index', compact('course', 'lab', 'assignments'));
     }
@@ -86,21 +87,22 @@ class AssignmentsController extends Controller
 
     private function validateRequest($lab)
     {
-        //still has a problem where some extentions are not accepted even after being registered
+        $validExtensions = [
+            'doc', 'docx', 'odt', 'pdf', 'rtf', 'tex', 'txt', 'wks', 'wps', 'wpd', // word processor & text
+            'c', 'cpp', 'class', 'cs', 'h', 'java', 'sh', 'swift', 'vb', 'py', // code files 1
+            'ods', 'xlr', 'xls', 'xlsx', // spreadsheet
+            'pps', 'ppt', 'pptx', 'odp', // presentation
+            'jpeg', 'png', 'bmp', 'ico', 'psd', '', // image
+            'asp', 'aspx', 'css', 'js', 'htm', 'html', 'jsp', 'php', 'xhtml', 'cer', 'php', // web related & markup
+            'dat', 'db', 'log', 'sql', 'xml', // database
+            '7z', 'zip', 'rar', 'tar.gz', // compression
+        ];
+
         $validatedData = request()->validate([
             'title' => 'required',
             'mark' => 'sometimes',
             'visibility' => 'required',
-            'source' => 'sometimes|max:2000|
-                mimes:
-                doc,odt,pdf,rtf,tex,wks,wps,wpd,txt,
-                c,cpp,class,cs,h,java,sh,swift,vb,
-                ods,xlr,xls,xlsx,
-                pps,ppt,pptx,
-                asp,aspx,css,js,htm,html,jsp,php,xhtml,
-                jpeg,jpg,png,bmp,
-                dat,db,log,sql,xml,
-                7z,zip,rar',
+            'source' => 'sometimes|max:2000|mimes:' . implode(",", $validExtensions),
             'comment' => 'sometimes',
         ]);
 
