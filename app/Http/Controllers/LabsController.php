@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Lab;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LabsController extends Controller
 {
@@ -18,7 +20,7 @@ class LabsController extends Controller
 
     public function index(Course $course)
     {
-        $labs = Lab::find($course->id)->paginate(15);
+        $labs = $course->labs()->orderBy('deadline', 'asc')->paginate(15);
 
         return view('courses.labs.index', compact('course', 'labs'));
     }
@@ -89,4 +91,26 @@ class LabsController extends Controller
         return $validatedData;
     }
 
+    // Exporting a List of assignment Owners and Marks.
+    public function makeList($id)
+    {
+        $lab = Lab::find($id);
+        $fileName = $lab->title . ".txt";
+
+        Storage::put($fileName, $lab->title . "\n");
+
+        $assignments = $lab->assignments()->get();
+        foreach ($assignments as $assignment) {
+            $owner = User::find($assignment->user_id);
+            $mark = $assignment->mark;
+
+            if ($mark == null) {
+                $mark = "Unmarked";
+            }
+
+            $content = "+ \t" . $owner->name . "\t\t - Mark : " . $mark;
+            Storage::append($fileName, $content);
+        }
+        return Storage::download($fileName);
+    }
 }

@@ -33,5 +33,6 @@
 </div>
 
 <a href="{{ route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]) }}">assignments</a>
+<a href="/makeList/{{ $lab->id }}">Export List</a>
 
 @endsection
