@@ -11,12 +11,12 @@ class RolesAndPermissionsTableSeeder extends Seeder
     {
         // thinking about putting these in the database, as the number can scale exponentially.
 
-        // $accountPermissions = [
-        //     'create assistant accounts',
-        //     'delete assistant accounts',
-        //     'delete accounts',
-        //     'delete own accounts',
-        // ];
+        $accountPermissions = [
+            'create assistant accounts',
+            'delete assistant accounts',
+            'delete accounts',
+            'delete own accounts',
+        ];
 
         $coursePermissions = [
             'view courses',
@@ -70,6 +70,11 @@ class RolesAndPermissionsTableSeeder extends Seeder
                 Permission::create(['name' => $permission]);
             }
         }
+        foreach ($accountPermissions as $permission) {
+            if (!Permission::where('name', $permission)->first()) {
+                Permission::create(['name' => $permission]);
+            }
+        }
 
         foreach ($roles as $role) {
             if (!Role::where('name', $role)->first()) {
@@ -91,6 +96,9 @@ class RolesAndPermissionsTableSeeder extends Seeder
             'view assignments',
             'edit assignments',
             'delete assignments',
+
+            'create assistant accounts',
+            'delete assistant accounts',
         ]);
         Role::where('name', 'student')->first()->syncPermissions([
             'view courses',
@@ -105,9 +113,11 @@ class RolesAndPermissionsTableSeeder extends Seeder
         // Role::where('name', 'assistant')->first()->syncPermissions([
 
         // ]);
-        // Role::where('name', 'guest')->first()->syncPermissions([
+        Role::where('name', 'guest')->first()->syncPermissions([
+            'view courses',
 
-        // ]);
+            'view labs',
+        ]);
 
     }
 }

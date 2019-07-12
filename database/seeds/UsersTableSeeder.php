@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        User::firstOrCreate([
+        $student = User::firstOrCreate([
             'name' => 'Aron Dennelly',
             'email' => 'arondennelly@mail.net',
             'email_verified_at' => now(),
