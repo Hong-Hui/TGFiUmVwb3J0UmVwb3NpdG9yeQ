@@ -36,9 +36,11 @@ class CoursesController extends Controller
     {
         $this->authorize('create', Course::class);
 
-        $course = Course::create($this->validateRequest());
-        $course->users()->sync([auth()->user()->id]);
-        $course->status = 'ongoing';
+        $validatedData = $this->validateRequest();
+        $validatedData['status'] = 'ongoing';
+
+        $course = Course::create($validatedData);
+        $course->users()->attach(auth()->user()->id);
 
         return redirect()->route('courses.index');
     }
@@ -61,9 +63,10 @@ class CoursesController extends Controller
     {
         $this->authorize('update', $course);
 
-        $validateRequest = $this->validateRequest();
+        $validatedData = $this->validateRequest();
+        $validatedData['status'] = request()->status;
 
-        $course->update($this->validateRequest());
+        $course->update($validatedData);
 
         return redirect()->route('courses.show', ['course' => $course]);
     }
@@ -87,7 +90,6 @@ class CoursesController extends Controller
             'year' => 'required',
             'semester' => 'required',
             'section' => 'required',
-            'status' => 'required',
         ]);
 
         return $validatedData;
