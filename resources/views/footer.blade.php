@@ -6,7 +6,7 @@
                 <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Latest Version</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="https://github.com/Hong-Hui/TGFiUmVwb3J0UmVwb3NpdG9yeQ">0.0.1</a>
+                        <a href="{{ route('version.index') }}">0.0.2</a>
                     </li>
                     <li>
                         <a href="{{ route('license') }}">License</a>
@@ -18,7 +18,13 @@
                 <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Latest Modification</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <p>29/06/2019</p>
+                        12/07/2019
+                        {{-- This will be extracted from github api next time --}}
+                    </li>
+                    <li>
+                        <a href="mailto:labreportrepository_1465564000000027769@bugs.zohoprojects.com">Report Bug</a>
+                        {{-- This is not quite working !!
+                        Report bug is bugged.. Oh The Irony !!! --}}
                     </li>
                 </ul>
             </div>
