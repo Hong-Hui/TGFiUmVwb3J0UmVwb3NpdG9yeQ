@@ -61,17 +61,20 @@
                             </div>
                         </div>
                     @endforeach
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            {{ $labs->links() }}
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
         </div>
     </div>
 </div>
-
-<hr>
-
-{{-- Needs to display students of this course only (now it displays all) --}}
-<a href="{{ route('students.index') }}">Students Index</a>
-
 @endsection
 
