@@ -39,6 +39,7 @@ class LabsController extends Controller
         $this->authorize('create', Lab::class);
 
         $lab = Lab::create($this->validateRequest($course));
+        $lab->users()->attach(auth()->user()->id);
 
         return redirect()->route('courses.labs.index', ['course' => $course]);
     }

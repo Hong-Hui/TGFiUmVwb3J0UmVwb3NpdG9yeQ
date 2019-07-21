@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\User;
+use \App\Lab;
 use \App\Course;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,26 @@ class StudentsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Course $course)
+    public function index(Course $course, Lab $lab)
     {
-        $students = User::students()->paginate(20);
+        if ($course->exists) {
 
-        return view('students.index', compact('students', 'course'));
+            if ($lab->exists) {
+
+                $students = $lab->users()->paginate(15);
+            } else {
+
+                $lab = new Lab();
+                $students = $course->users()->paginate(15);
+            }
+        } else {
+
+            $course = new Course();
+            $lab = new Lab();
+            $students = User::students()->paginate(15);
+        }
+
+        return view('students.index', compact('students', 'course', 'lab'));
     }
 
     public function create()
@@ -32,7 +48,10 @@ class StudentsController extends Controller
 
     public function show($id)
     {
-        //
+
+        $student = User::find($id);
+
+        return view('students.show', compact('student'));
     }
 
     public function edit($id)

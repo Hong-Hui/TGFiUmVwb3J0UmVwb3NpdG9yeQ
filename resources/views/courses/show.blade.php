@@ -35,6 +35,9 @@
     </div>
 </div>
 
-<a href="{{ route('courses.labs.index', ['course' => $course]) }}">labs</a>
+<a href="{{ route('courses.labs.index', ['course' => $course]) }}">Labs Index</a>
 
+<hr>
+
+<a href="{{ route('course.students.index', ['course' => $course]) }}">Members Index</a>
 @endsection

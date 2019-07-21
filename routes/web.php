@@ -85,4 +85,8 @@ Route::get('/version/index', function () {
 })->name('version.index');
 
 //Export List
-Route::get('/makeList/{lab}', 'labsController@makeList');
+Route::get('/makeList/{lab}', 'LabsController@makeList')->name('labs.makeList');
+
+Route::get('courses/{course}/students', 'StudentsController@index')->name('course.students.index');
+
+Route::get('courses/{course}/labs/{lab}/students', 'StudentsController@index')->name('lab.students.index');

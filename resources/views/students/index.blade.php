@@ -6,7 +6,11 @@
 
 <div class="row">
     <div class="col-12">
-        <h2>Students Index {{ $course->name }}</h2>
+        <h2>
+            Students Index - {{ $course->name ?? 'All Courses' }}
+            <span class="text-muted">{{ $course->year }}</span>
+             - {{ $lab->title ?? 'All Labs' }}
+        </h2>
     </div>
 </div>
 

@@ -8,7 +8,7 @@
     <div class="col-12">
         <h1>Details for {{ $lab->title }}</h1>
 
-        <a href="{{ route('courses.labs.edit', ['course' => $course, 'lab' => $lab]) }}">Edit</a>
+        <a href="{{ route('courses.labs.edit', ['course' => $course, 'lab' => $lab]) }}">Edit Lab</a>
 
         <form action="{{ route('courses.labs.destroy', ['course' => $course, 'lab' => $lab]) }}" method="POST">
             @method('DELETE')
@@ -32,7 +32,10 @@
     </div>
 </div>
 
-<a href="{{ route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]) }}">assignments</a>
-<a href="/makeList/{{ $lab->id }}">Export List</a>
+<a href="{{ route('courses.labs.assignments.index', ['course' => $course, 'lab' => $lab]) }}">Assignments Index</a>
+<br>
+<a href="{{ route('labs.makeList', ['lab' => $lab]) }}">Export as Txt file</a>
+<hr>
+<a href="{{ route('lab.students.index', ['course' => $course, 'lab' => $lab]) }}">Members Index</a>
 
 @endsection
